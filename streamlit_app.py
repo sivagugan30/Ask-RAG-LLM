@@ -2,9 +2,6 @@ import os
 import streamlit as st
 from typing import List
 import langchain
-from langchain.vectorstores import Chroma
-from langchain.llms import OpenAI
-from langchain.chains import RetrievalQA
 
 
 # Set API key (replace with your own or use environment variables)
