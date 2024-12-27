@@ -1,6 +1,6 @@
 import streamlit as st
 import openai
-import chromadb
+from streamlit_chromadb_connection.chromadb_connection import ChromadbConnection
 #import sqlite3
 import json
 import pickle
