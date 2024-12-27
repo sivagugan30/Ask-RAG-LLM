@@ -9,20 +9,16 @@ from openai import OpenAI
 #from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
-import streamlit as st
+from streamlit_chromadb_connection.chromadb_connection import ChromadbConnection
 
 configuration = {
-    "client_type": "PersistentClient",
+    "client": "PersistentClient",
     "path": "/tmp/.chroma"
 }
 
-collection_name = "documents_collection"
-
-conn = st.experimental_connection("chromadb",
-                                type=ChromaDBConnection,
-                                **configuration)
-
-documents_collection_df = conn.create_collection_data(collection_name)
+conn = st.connection(name="persistent_chromadb",
+                     type=ChromadbConnection,
+                     **configuration)
 
 
 # Manually set the API key for testing purposes
