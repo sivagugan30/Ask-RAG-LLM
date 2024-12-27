@@ -74,3 +74,12 @@ def load_from_sqlite(db_base_path):
     print("Data loaded from all SQLite databases into a dictionary.")
     return vector_dict
 
+
+
+# Example usage
+DB_PATH = "https://github.com/sivagugan30/Ask-RAG-LLM/blob/main/sqlite/famous_five"
+vector_dict3 = load_from_sqlite(DB_PATH)
+
+
+
+
