@@ -4,3 +4,5 @@ chromadb==0.5.3
 pandas==2.2.2
 numpy==1.26.4
 streamlit==1.36.0
+pysqlite-binary==0.5.1.3380300
+pysqlite3==0.5.2
