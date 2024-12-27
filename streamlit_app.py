@@ -1,7 +1,7 @@
 import streamlit as st
 import openai
 import chromadb
-import sqlite3
+#import sqlite3
 import json
 import pickle
 from openai import OpenAI
