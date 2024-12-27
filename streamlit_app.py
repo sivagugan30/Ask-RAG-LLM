@@ -31,15 +31,16 @@ for db_url in db_urls:
     # Establish a connection to the SQLite database in memory
     st.write("Connecting to SQLite database in memory.")
     conn = sqlite3.connect(":memory:")  # In-memory SQLite database
-    cursor = conn.cursor()
 
     try:
         # Load database content into SQLite memory
         st.write("Loading database into memory.")
-        conn.executescript(db_file.getvalue().decode())
+        with conn:
+            conn.executescript(f"ATTACH DATABASE '{db_url}' AS remote;")
 
         # Query the data
         st.write("Querying the data from the table 'collection'.")
+        cursor = conn.cursor()
         cursor.execute("SELECT id, document, metadata, embedding FROM collection")
         rows = cursor.fetchall()
         st.write(f"Fetched {len(rows)} rows from the database.")
