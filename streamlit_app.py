@@ -1,14 +1,12 @@
 import requests
-import sqlite3
 import json
-import pickle
 import numpy as np
 import io
 import streamlit as st
 
-# List of database URLs
-db_urls = [
-    "https://github.com/sivagugan30/Ask-RAG-LLM/raw/main/sqlite/famous_five_1.db"
+# List of JSON URLs
+json_urls = [
+    "https://github.com/sivagugan30/Ask-RAG-LLM/raw/main/sqlite/famous_five_1.json"
 ]
 
 ids = []
@@ -16,49 +14,32 @@ documents = []
 metadata = []
 embeddings = []
 
-for db_url in db_urls:
-    st.write(f"Fetching database from: {db_url}")
+for json_url in json_urls:
+    st.write(f"Fetching JSON data from: {json_url}")
     try:
-        # Fetch database content
-        response = requests.get(db_url)
+        # Fetch JSON content
+        response = requests.get(json_url)
         response.raise_for_status()  # Raise an exception for HTTP errors
-        st.write(f"Successfully fetched database from {db_url}")
-        db_file = io.BytesIO(response.content)  # Load content into a file-like object
+        st.write(f"Successfully fetched JSON data from {json_url}")
+        json_data = response.json()  # Parse the JSON content
     except requests.exceptions.RequestException as e:
-        st.write(f"Failed to fetch database from {db_url}: {e}")
+        st.write(f"Failed to fetch JSON data from {json_url}: {e}")
         continue  # Skip this URL if fetching fails
 
-    # Establish a connection to the SQLite database in memory
-    st.write("Connecting to SQLite database in memory.")
-    conn = sqlite3.connect(":memory:")  # In-memory SQLite database
-
+    # Process the data from the JSON
     try:
-        # Load database content into SQLite memory
-        st.write("Loading database into memory.")
-        with conn:
-            conn.executescript(f"ATTACH DATABASE '{db_url}' AS remote;")
-
-        # Query the data
-        st.write("Querying the data from the table 'collection'.")
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, document, metadata, embedding FROM collection")
-        rows = cursor.fetchall()
-        st.write(f"Fetched {len(rows)} rows from the database.")
-
-        # Process rows
-        for row in rows:
-            ids.append(row[0])
-            documents.append(row[1])
-            metadata.append(json.loads(row[2]))  # Deserialize JSON metadata
-            embeddings.append(pickle.loads(row[3]))  # Deserialize BLOB embedding
-
-        st.write(f"Processed {len(rows)} rows successfully.")
+        st.write("Processing JSON data.")
+        
+        ids = json_data["ids"]
+        documents = json_data["documents"]
+        metadata = json_data["metadata"]
+        embeddings = json_data["embeddings"]
+        
+        st.write(f"Processed data with {len(ids)} rows successfully.")
+    except KeyError as e:
+        st.write(f"Error: Key {e} not found in the JSON data.")
     except Exception as e:
-        st.write(f"Error reading from the database at {db_url}: {e}")
-    finally:
-        # Close the database connection
-        conn.close()
-        st.write(f"SQLite connection to {db_url} closed.")
+        st.write(f"Error processing the JSON data: {e}")
 
 # Convert embeddings to a NumPy array
 st.write("Converting embeddings to a NumPy array.")
