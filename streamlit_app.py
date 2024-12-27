@@ -6,7 +6,7 @@ import streamlit as st
 
 # List of JSON URLs
 json_urls = [
-    "famous_five_1.json"
+    "https://github.com/sivagugan30/Ask-RAG-LLM/blob/main/famous_five_1.json"
 ]
 
 ids = []
