@@ -77,7 +77,7 @@ def load_from_sqlite(db_base_path):
 
 
 # Example usage
-DB_PATH = "https://github.com/sivagugan30/Ask-RAG-LLM/blob/main/sqlite/famous_five"
+DB_PATH = "https://github.com/sivagugan30/Ask-RAG-LLM/blob/main/sqlite/famous_five.md"
 vector_dict3 = load_from_sqlite(DB_PATH)
 
 
