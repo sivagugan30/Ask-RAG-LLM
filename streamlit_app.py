@@ -1,12 +1,10 @@
-import requests
 import json
 import numpy as np
-import io
 import streamlit as st
 
-# List of JSON URLs
-json_urls = [
-    "https://github.com/sivagugan30/Ask-RAG-LLM/blob/main/famous_five_1.json"
+# List of JSON file paths (local directory)
+json_files = [
+    "famous_five_1.json"  # Update this path as necessary
 ]
 
 ids = []
@@ -14,17 +12,17 @@ documents = []
 metadata = []
 embeddings = []
 
-for json_url in json_urls:
-    st.write(f"Fetching JSON data from: {json_url}")
+for json_file in json_files:
+    st.write(f"Loading JSON data from: {json_file}")
     try:
-        # Fetch JSON content
-        response = requests.get(json_url)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        st.write(f"Successfully fetched JSON data from {json_url}")
-        json_data = response.json()  # Parse the JSON content
-    except requests.exceptions.RequestException as e:
-        st.write(f"Failed to fetch JSON data from {json_url}: {e}")
-        continue  # Skip this URL if fetching fails
+        # Open and read the JSON file
+        with open(json_file, 'r') as file:
+            json_data = json.load(file)  # Parse the JSON content
+            
+        st.write(f"Successfully loaded JSON data from {json_file}")
+    except Exception as e:
+        st.write(f"Failed to load JSON data from {json_file}: {e}")
+        continue  # Skip this file if reading fails
 
     # Process the data from the JSON
     try:
