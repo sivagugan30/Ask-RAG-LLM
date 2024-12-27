@@ -6,7 +6,7 @@ import streamlit as st
 
 # List of JSON URLs
 json_urls = [
-    "https://github.com/sivagugan30/Ask-RAG-LLM/raw/main/sqlite/famous_five_1.json"
+    "famous_five_1.json"
 ]
 
 ids = []
