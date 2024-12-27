@@ -1,12 +1,28 @@
 import streamlit as st
 import openai
-from streamlit_chromadb_connection.chromadb_connection import ChromadbConnection
+#from streamlit_chromadb_connection.chromadb_connection import ChromadbConnection
 #import sqlite3
 import json
 import pickle
 from openai import OpenAI
 #from langchain.schema import Document
 #from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+
+import streamlit as st
+
+configuration = {
+    "client_type": "PersistentClient",
+    "path": "/tmp/.chroma"
+}
+
+collection_name = "documents_collection"
+
+conn = st.experimental_connection("chromadb",
+                                type=ChromaDBConnection,
+                                **configuration)
+
+documents_collection_df = conn.create_collection_data(collection_name)
 
 
 # Manually set the API key for testing purposes
