@@ -1,6 +1,7 @@
-streamlit
-langchain
-chromadb
-openai
-pandas
-numpy
+streamlit==1.20.0
+openai==0.27.0
+chromadb==0.3.6
+sqlite3==3.35.0  # or you can omit this and install pysqlite3
+pysqlite3==0.4.6  # optional, to fix SQLite version compatibility
+json5==0.9.11
+pickle5==0.0.11
