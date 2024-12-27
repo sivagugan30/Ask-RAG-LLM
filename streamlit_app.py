@@ -91,9 +91,7 @@ def load_from_sqlite_list(db_urls):
 
 # Example usage in Streamlit
 db_urls = [
-    "https://github.com/sivagugan30/Ask-RAG-LLM/raw/main/sqlite/famous_five_1.db",
-    "https://github.com/sivagugan30/Ask-RAG-LLM/raw/main/sqlite/famous_five_2.db",
-    "https://github.com/sivagugan30/Ask-RAG-LLM/raw/main/sqlite/famous_five_3.db",
+    "famous_five_1.db" 
 ]
 
 vector_dict3 = load_from_sqlite_list(db_urls)
