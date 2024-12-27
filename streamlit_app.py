@@ -4,8 +4,9 @@ from typing import List
 import langchain
 
 
-# Set API key (replace with your own or use environment variables)
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your_openai_api_key_here")
+
+
+os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
 # App title
 st.title("Ask-RAG-LLM")
