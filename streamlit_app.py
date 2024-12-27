@@ -11,7 +11,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 # App title
 st.title("Ask-RAG-LLM")
 
-st.writw(os.environ["OPENAI_API_KEY"])
+st.write(os.environ["OPENAI_API_KEY"])
 
 # Sidebar for topic selection and document upload
 st.sidebar.header("Options")
