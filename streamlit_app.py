@@ -3,9 +3,6 @@ import streamlit as st
 from typing import List
 import langchain
 
-
-
-
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
 # App title
