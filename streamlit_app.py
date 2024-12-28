@@ -283,13 +283,13 @@ with tabs[1]:
         row_1 = st.columns([2, 1])
         with row_1[0]:
             temperature = st.slider(
-                "Temperature", min_value=0.0, max_value=1.0, value=0.7, step=0.1,
+                "Temperature", min_value=0.0, max_value=1.0, value=0.5, step=0.1,
                 help="Controls the randomness of the model's responses. Higher values (closer to 1) make the output more creative."
             )
         
         with row_1[1]:
             top_p = st.slider(
-                "Top P", min_value=0.0, max_value=1.0, value=0.9, step=0.1,
+                "Top P", min_value=0.0, max_value=1.0, value=0.5, step=0.1,
                 help="Controls the diversity of responses by focusing on high-probability tokens."
             )
         
@@ -302,7 +302,7 @@ with tabs[1]:
         
         with row_2[1]:
             frequency_penalty = st.slider(
-                "Frequency Penalty", min_value=0.0, max_value=2.0, value=0.5, step=0.1,
+                "Frequency Penalty", min_value=0.0, max_value=2.0, value=1.0, step=0.1,
                 help="Reduces the likelihood of repetitive words in the response."
             )
     
