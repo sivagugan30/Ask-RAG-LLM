@@ -238,35 +238,35 @@ This page allows you to upload Markdown documents (.md) and split them into smal
 """)
 
 with st.form("document_input"):
-        uploaded_files = st.file_uploader(
-            "Upload Markdown Files", type=["md"], accept_multiple_files=True
+    uploaded_files = st.file_uploader(
+        "Upload Markdown Files", type=["md"], accept_multiple_files=True
+    )
+
+    row_1 = st.columns([2, 1])
+    with row_1[0]:
+        chunk_size = st.number_input(
+            "Chunk Size", value=300, min_value=0, step=1
         )
 
-        row_1 = st.columns([2, 1])
-        with row_1[0]:
-            chunk_size = st.number_input(
-                "Chunk Size", value=300, min_value=0, step=1
-            )
+    with row_1[1]:
+        chunk_overlap = st.number_input(
+            "Chunk Overlap", value=100, min_value=0, step=1
+        )
 
-        with row_1[1]:
-            chunk_overlap = st.number_input(
-                "Chunk Overlap", value=100, min_value=0, step=1
-            )
+    row_2 = st.columns([2, 1])
+    with row_2[0]:
+        source_name = st.text_input(
+            "Source Name", "Enter the name of the uploaded file or custom name",
+            help="If left empty, the uploaded file's name will be used."
+        )
 
-        row_2 = st.columns([2, 1])
-        with row_2[0]:
-            source_name = st.text_input(
-                "Source Name", "Enter the name of the uploaded file or custom name",
-                help="If left empty, the uploaded file's name will be used."
-            )
+    with row_2[1]:
+        add_start_index = st.selectbox(
+            "Add Start Index", [True, False], index=0,
+            help="Choose whether to add the start index to each chunk."
+        )
 
-        with row_2[1]:
-            add_start_index = st.selectbox(
-                "Add Start Index", [True, False], index=0,
-                help="Choose whether to add the start index to each chunk."
-            )
-
-        save_button = st.form_submit_button("Process Documents")
+    save_button = st.form_submit_button("Process Documents")
 
     if save_button:
         if uploaded_files:
@@ -275,11 +275,11 @@ with st.form("document_input"):
                 content = file.read().decode("utf-8")
                 metadata_source = source_name if source_name.strip() else file.name
                 documents.append(Document(page_content=content, metadata={"source": metadata_source}))
-
+    
             st.write(f"Uploaded {len(documents)} documents.")
-
+    
             chunks = split_text(documents, chunk_size, chunk_overlap, add_start_index)
-
+    
             if chunks:
                 st.write("Example chunk:")
                 st.write(chunks[0].page_content)
