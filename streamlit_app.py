@@ -62,42 +62,6 @@ def load_json_files(json_files):
     return vector_dict
 
 
-# Function to query the vector_dict with a 'where' filter
-def query_vector_dict(vector_dict, where=None):
-    ids = vector_dict["ids"]
-    documents = vector_dict["documents"]
-    metadata = vector_dict["metadata"]
-    embeddings = vector_dict["embeddings"]
-
-    # Filter metadata based on the 'where' condition
-    if where:
-        matching_indices = []
-        for i, metadata_item in enumerate(metadata):
-            if all(metadata_item.get(key) == value for key, value in where.items()):
-                matching_indices.append(i)
-
-        # Retrieve the documents and embeddings for the matching indices
-        matching_documents = [documents[i] for i in matching_indices]
-        matching_metadata = [metadata[i] for i in matching_indices]
-        matching_embeddings = embeddings[matching_indices]
-
-        results = {
-            "ids": [ids[i] for i in matching_indices],
-            "documents": matching_documents,
-            "metadata": matching_metadata,
-            "embeddings": matching_embeddings
-        }
-
-        return results
-    else:
-        return {
-            "ids": ids,
-            "documents": documents,
-            "metadata": metadata,
-            "embeddings": embeddings
-        }
-
-
 # Function to generate embeddings for a query using OpenAI API
 def generate_query_embeddings(query_text):
     query_embeddings = OpenAI().embeddings.create(
@@ -109,10 +73,78 @@ def generate_query_embeddings(query_text):
     return query_embeddings
 
 
+# Function to query the vector_dict to find the closest neighbors
+def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_results=3, where=None, where_document=None, include=["metadatas", "documents", "distances"]):
+    """
+    Query the vector_dict to find the closest neighbors.
+    """
+    ids = vector_dict["ids"]
+    documents = vector_dict["documents"]
+    metadata = vector_dict["metadata"]
+    embeddings = vector_dict["embeddings"]
 
+    # Function to filter metadata or documents based on where conditions
+    def apply_filter(data, filter_condition):
+        if filter_condition is None:
+            return data
+        filtered_data = []
+        for item in data:
+            if all(item.get(key) == value for key, value in filter_condition.items()):
+                filtered_data.append(item)
+        return filtered_data
+
+    # Apply the `where` and `where_document` filters
+    if where:
+        metadata = apply_filter(metadata, where)
+    if where_document:
+        documents = apply_filter(documents, where_document)
+
+    # Calculate the cosine similarity for query_embeddings or query_texts
+    if query_embeddings is not None:
+        similarities = cosine_similarity(query_embeddings, embeddings)
+    elif query_texts is not None:
+        query_embeddings = generate_query_embeddings(query_texts)
+        similarities = cosine_similarity(query_embeddings, embeddings)
+    else:
+        raise ValueError("Either query_embeddings or query_texts must be provided.")
+
+    # Get the closest neighbors (sorted by descending similarity)
+    closest_indices = np.argsort(similarities, axis=1)[:, ::-1][:, :n_results]
+
+    # Prepare the results
+    results = {
+        "ids": [ids[i] for i in closest_indices.flatten()],
+        "documents": [documents[i] for i in closest_indices.flatten()],
+        "metadata": [metadata[i] for i in closest_indices.flatten()],
+        "distances": [similarities[0, i] for i in closest_indices.flatten()]
+    }
+
+    # Include only the specified fields
+    filtered_results = {}
+    if "embeddings" in include:
+        filtered_results["embeddings"] = [embeddings[i] for i in closest_indices.flatten()]
+    if "metadatas" in include:
+        filtered_results["metadata"] = [metadata[i] for i in closest_indices.flatten()]
+    if "documents" in include:
+        filtered_results["documents"] = [documents[i] for i in closest_indices.flatten()]
+    if "distances" in include:
+        filtered_results["distances"] = [similarities[0, i] for i in closest_indices.flatten()]
+
+    return filtered_results
+
+
+# Streamlit UI
 st.title("Famous Five Query App")
 
 # Load data from JSON files
+json_files = [
+    "famous_five_1.json",
+    "famous_five_2.json",
+    "famous_five_3.json",
+    "famous_five_4.json",
+    "famous_five_5.json"
+]
+
 vector_dict = load_json_files(json_files)
 
 # Query input
@@ -125,7 +157,7 @@ if query_text:
     # Perform a query on the data (this example checks metadata or document data)
     st.write("Performing query...")
     where = {'source': '01-five-on-a-treasure-island.md'}  # Example filter, adjust as needed
-    results = query_vector_dict(vector_dict, where)
+    results = query_vector_dict(vector_dict, query_texts=query_text, n_results=3, where=where)
 
     # Display the results
     st.write(f"Found {len(results['ids'])} matching results:")
@@ -133,6 +165,7 @@ if query_text:
         st.write(f"ID: {results['ids'][i]}")
         st.write(f"Document: {results['documents'][i]}")
         st.write(f"Metadata: {results['metadata'][i]}")
+        st.write(f"Distance: {results['distances'][i]}")
         st.write("---")
         
 else:
