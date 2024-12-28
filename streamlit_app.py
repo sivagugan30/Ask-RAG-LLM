@@ -390,7 +390,7 @@ with tabs[1]:
                 st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
                 
                 Generated response: \' {reply.choices[0].message.content}\ ' 
-                "")
+                """)
                                 
         else:
             st.write("Please enter a query to get results.")
