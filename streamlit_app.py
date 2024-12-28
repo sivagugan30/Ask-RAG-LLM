@@ -338,13 +338,6 @@ with tabs[1]:
     
         # Display the results
         st.write(results)
-        
-        for i in range(len(results['distances'])):
-            st.write(f"Document: {results['documents'][i]}")
-            st.write(f"Metadata: {results['metadata'][i]}")
-            st.write(f"Distance: {results['distances'][i]}")
-            
-            st.write("---")
             
     else:
         st.write("Please enter a query to get results.")
