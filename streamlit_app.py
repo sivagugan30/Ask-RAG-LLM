@@ -161,6 +161,9 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 
+
+
+
 def load_documents(directory):
     documents = []
     for filename in os.listdir(directory):
@@ -170,6 +173,8 @@ def load_documents(directory):
                 content = f.read()
                 documents.append(Document(page_content=content, metadata={"source": filename}))
     return documents
+
+
 
 def split_text(documents, chunk_size, chunk_overlap, add_start_index):
     # Check for invalid overlap value
@@ -374,7 +379,7 @@ with tabs[1]:
                 
                 # Display the response content
                 st.write(reply.choices[0].message.content)
-    
+                
             except Exception as e:
                 st.error(f"Error generating response: {e}")
             
@@ -383,9 +388,9 @@ with tabs[1]:
                 st.write("Retrieved top 3 results basis cosine similarity on query embeddings.")
                 
                 result1 = {
-                            "distances": result["distances"],
-                            "documents": result["documents"],
-                            "metadata": result["metadata"],
+                            "distances" : results["distances"],
+                            "documents" : results["documents"],
+                            "metadata"  : results["metadata"],
                         }
 
                 
