@@ -73,7 +73,7 @@ def generate_query_embeddings(query_text):
     return query_embeddings
 
 
-# Function to query the vector_dict to find the closest neighbors
+# Define the query_vector_dict function
 def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_results=3, where=None, where_document=None, include=["metadatas", "documents", "distances"]):
     """
     Query the vector_dict to find the closest neighbors.
@@ -99,12 +99,19 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
     if where_document:
         documents = apply_filter(documents, where_document)
 
+    # Ensure we also filter embeddings and ids based on the metadata or documents filter
+    filtered_ids = [ids[i] for i in range(len(ids)) if metadata[i] in metadata]
+    filtered_documents = [documents[i] for i in range(len(documents)) if metadata[i] in metadata]
+    filtered_metadata = [metadata[i] for i in range(len(metadata)) if metadata[i] in metadata]
+    filtered_embeddings = [embeddings[i] for i in range(len(embeddings)) if metadata[i] in metadata]
+
     # Calculate the cosine similarity for query_embeddings or query_texts
     if query_embeddings is not None:
-        similarities = cosine_similarity(query_embeddings, embeddings)
+        similarities = cosine_similarity(query_embeddings, filtered_embeddings)
     elif query_texts is not None:
-        query_embeddings = generate_query_embeddings(query_texts)
-        similarities = cosine_similarity(query_embeddings, embeddings)
+        # Generate embeddings for the query_texts
+        query_embeddings = generate_embeddings(query_texts)
+        similarities = cosine_similarity(query_embeddings, filtered_embeddings)
     else:
         raise ValueError("Either query_embeddings or query_texts must be provided.")
 
@@ -113,20 +120,20 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
 
     # Prepare the results
     results = {
-        "ids": [ids[i] for i in closest_indices.flatten()],
-        "documents": [documents[i] for i in closest_indices.flatten()],
-        "metadata": [metadata[i] for i in closest_indices.flatten()],
+        "ids": [filtered_ids[i] for i in closest_indices.flatten()],
+        "documents": [filtered_documents[i] for i in closest_indices.flatten()],
+        "metadata": [filtered_metadata[i] for i in closest_indices.flatten()],
         "distances": [similarities[0, i] for i in closest_indices.flatten()]
     }
 
     # Include only the specified fields
     filtered_results = {}
     if "embeddings" in include:
-        filtered_results["embeddings"] = [embeddings[i] for i in closest_indices.flatten()]
+        filtered_results["embeddings"] = [filtered_embeddings[i] for i in closest_indices.flatten()]
     if "metadatas" in include:
-        filtered_results["metadata"] = [metadata[i] for i in closest_indices.flatten()]
+        filtered_results["metadata"] = [filtered_metadata[i] for i in closest_indices.flatten()]
     if "documents" in include:
-        filtered_results["documents"] = [documents[i] for i in closest_indices.flatten()]
+        filtered_results["documents"] = [filtered_documents[i] for i in closest_indices.flatten()]
     if "distances" in include:
         filtered_results["distances"] = [similarities[0, i] for i in closest_indices.flatten()]
 
