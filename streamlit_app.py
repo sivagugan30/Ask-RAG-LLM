@@ -244,10 +244,10 @@ with st.form("document_input"):
 
     row_1 = st.columns([2, 1])
     with row_1[0]:
-    chunk_size = st.number_input(
-        "Chunk Size", value=300, min_value=0, step=1,
-        help="Specifies the maximum number of characters in each chunk of text"
-    )
+        chunk_size = st.number_input(
+            "Chunk Size", value=300, min_value=0, step=1,
+            help="Specifies the maximum number of characters in each chunk of text"
+        )
 
     with row_1[1]:
         chunk_overlap = st.number_input(
