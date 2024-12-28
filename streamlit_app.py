@@ -166,7 +166,7 @@ if query_text:
 
     # Perform a query on the data (this example checks metadata or document data)
     st.write("Performing query...")
-    where = {'source': '01-five-on-a-treasure-island.md'}  # Example filter, adjust as needed
+    #where = {'source': '01-five-on-a-treasure-island.md'}  # Example filter, adjust as needed
     results = query_vector_dict(
                                 vector_dict, 
                                 query_embeddings = query_embeddings,
