@@ -316,8 +316,8 @@ with tabs[1]:
     
     
     
-    # Query input
-    query_text = st.text_input("Enter your query:")
+    # Query input with default value
+    query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
     
     # If the button is clicked, process the RAG response
     if st.button("Generate RAG Response"):
@@ -337,27 +337,27 @@ with tabs[1]:
             # Construct the prompt for the LLM
             prompt = f"""
                         Basis the retrieved text chunks and the initial user query, generate a response.
-    
+            
                         Query: " {query_text} "
-    
+            
                         Top 3 results:
                         1 >>>>> {results['documents'][0]}
                         2 >>>>> {results['documents'][1]}
                         3 >>>>> {results['documents'][2]}
-    
+            
                         Metadata:
                         - Source:
                             1 >>>>> {results['metadata'][0]['source']}
                             2 >>>>> {results['metadata'][1]['source']}
                             3 >>>>> {results['metadata'][2]['source']}
-    
+            
                         - Start Index:
                             1 >>>>> {results['metadata'][0]['start_index']}
                             2 >>>>> {results['metadata'][1]['start_index']}
                             3 >>>>> {results['metadata'][2]['start_index']}
-    
+            
                         Mention the Source and Start Index as well.
-    
+            
                         If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
             """
             
@@ -379,20 +379,28 @@ with tabs[1]:
             
             # Display the retrieved results and prompt in expanders for transparency
             with st.expander("1. Retrieve", expanded=False):
+                st.write("Based on cosine similarity, the top 3 text chunks are retrieved from the vector embeddings.")
                 st.write(results)
             
             with st.expander("2. Augment", expanded=False):
-                st.write(prompt)
-
+                st.write("""
+                            The augmented prompt is created by combining the query and retrieved documents along with their metadata. 
+                            Here’s the information used to generate the response:
+                            - Distances between the query and the retrieved documents.
+                            - The documents themselves.
+                            - The metadata, including source and start index.
+                          """)
+                st.write(f"Top 3 results:\n1. {results['documents'][0]}\n2. {results['documents'][1]}\n3. {results['documents'][2]}")
+                st.write(f"Metadata:\n- Source: {results['metadata'][0]['source']}\n- Start Index: {results['metadata'][0]['start_index']}")
+            
             with st.expander("3. Generate", expanded=False):
                 st.write(f"""
-                            The augmented prompt, including the top 3 retrieved results and metadata, is fed into the language model (LLM).
+                            The augmented prompt (Retrieval-Augmented input) is fed into the language model (LLM).
                             The LLM processes the query and context to generate a relevant response, utilizing the provided documents and their metadata.
                             
-                            The generated response in the current setup is : f" {reply.choices[0].message.content} ".
+                            The generated response in the current setup is: 
+                            " {reply.choices[0].message.content} "
                         """)
-                            
+                                
         else:
             st.write("Please enter a query to get results.")
-    
-        
