@@ -180,10 +180,10 @@ if query_text:
     st.write(results)
     
     for i in range(len(results['ids'])):
-        st.write(f"ID: {results['ids'][i]}")
         st.write(f"Document: {results['documents'][i]}")
         st.write(f"Metadata: {results['metadata'][i]}")
         st.write(f"Distance: {results['distances'][i]}")
+        
         st.write("---")
         
 else:
