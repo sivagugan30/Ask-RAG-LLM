@@ -49,7 +49,7 @@ embeddings_array = np.array(embeddings)
 
 # Combine all data into a dictionary
 st.write("Combining all data into a single dictionary.")
-vector_dict = {
+vector_dict1 = {
     "ids": ids,
     "documents": documents,
     "metadata": metadata,
@@ -57,5 +57,11 @@ vector_dict = {
 }
 
 st.write("Data loading complete. Here's the combined dictionary:")
-st.write(f"Shape of embeddings: {vector_dict['embeddings'].shape}")
-st.write(f"Number of IDs: {len(vector_dict['ids'])}")
+st.write(f"Shape of embeddings: {vector_dict1['embeddings'].shape}")
+st.write(f"Number of IDs: {len(vector_dict1['ids'])}")
+
+
+st.write("")
+st.write(vector_dict1)
+
+
