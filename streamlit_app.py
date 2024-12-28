@@ -258,6 +258,7 @@ with tabs[0]:
             st.warning("Please upload at least one Markdown file.")
 
 
+
 with tabs[1]:
     
     
@@ -333,7 +334,7 @@ with tabs[1]:
                 n_results=3
                 # ,where=where
             )
-    
+            
             # Construct the prompt for the LLM
             prompt = f"""
                         Basis the retrieved text chunks and the initial user query, generate a response.
@@ -380,7 +381,15 @@ with tabs[1]:
             # Display the retrieved results and prompt for transparency
             with st.expander("1. Retrieve", expanded=False):
                 st.write("Retrieved top 3 results basis cosine similarity on query embeddings.")
-                st.write(results)
+                
+                result1 = {
+                            "distances": result["distances"],
+                            "documents": result["documents"],
+                            "metadata": result["metadata"],
+                        }
+
+                
+                st.write(results1)
             
             # Augment: Combine QUERY, TEXT, and METADATA
             with st.expander("2. Augment", expanded=False):
