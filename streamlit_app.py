@@ -243,60 +243,67 @@ def split_text(documents, chunk_size, chunk_overlap, add_start_index):
         return []
 
 
-with st.form("document_input"):
-    uploaded_files = st.file_uploader(
-        "Upload Markdown Files", type=["md"], accept_multiple_files=True
-    )
+# Tabs
+tabs = st.tabs(["Document Embedding", "RAG Chatbot"])
 
-    row_1 = st.columns([2, 1])
-    with row_1[0]:
-        chunk_size = st.number_input(
-            "Chunk Size", value=300, min_value=0, step=1,
-            help="Specifies the maximum number of characters in each chunk of text"
-        )
 
-    with row_1[1]:
-        chunk_overlap = st.number_input(
-            "Chunk Overlap", value=100, min_value=0, step=1,
-            help="Defines how much overlap (in characters) exists between consecutive chunks"
-        )
-
-    row_2 = st.columns([2, 1])
-    with row_2[0]:
-        source_name = st.text_input(
-            "New Vector Store Name", "vector_store_1",
-            help="If left empty, the uploaded file's name will be used"
-        )
-
-    with row_2[1]:
-        add_start_index = st.selectbox(
-            "Add Start Index", [True, False], index=0,
-            help="Choose whether to add the start index to each chunk"
-        )
-
-    save_button = st.form_submit_button("Process Documents")
-
-    if save_button:
-        if uploaded_files:
-            documents = []
-            for file in uploaded_files:
-                content = file.read().decode("utf-8")
-                metadata_source = source_name if source_name.strip() else file.name
-                documents.append(Document(page_content=content, metadata={"source": metadata_source}))
+with tabs[0]:
+    st.header("Document Embedding")
     
-            st.write(f"Uploaded {len(documents)} documents.")
+    with st.form("document_input"):
+        uploaded_files = st.file_uploader(
+            "Upload Markdown Files", type=["md"], accept_multiple_files=True
+        )
     
-            chunks = split_text(documents, chunk_size, chunk_overlap, add_start_index)
+        row_1 = st.columns([2, 1])
+        with row_1[0]:
+            chunk_size = st.number_input(
+                "Chunk Size", value=300, min_value=0, step=1,
+                help="Specifies the maximum number of characters in each chunk of text"
+            )
     
-            
-
-            if chunks:
-                # Pick a random chunk index
-                random_index = random.randint(0, len(chunks) - 1)
+        with row_1[1]:
+            chunk_overlap = st.number_input(
+                "Chunk Overlap", value=100, min_value=0, step=1,
+                help="Defines how much overlap (in characters) exists between consecutive chunks"
+            )
+    
+        row_2 = st.columns([2, 1])
+        with row_2[0]:
+            source_name = st.text_input(
+                "New Vector Store Name", "vector_store_1",
+                help="If left empty, the uploaded file's name will be used"
+            )
+    
+        with row_2[1]:
+            add_start_index = st.selectbox(
+                "Add Start Index", [True, False], index=0,
+                help="Choose whether to add the start index to each chunk"
+            )
+    
+        save_button = st.form_submit_button("Process Documents")
+    
+        if save_button:
+            if uploaded_files:
+                documents = []
+                for file in uploaded_files:
+                    content = file.read().decode("utf-8")
+                    metadata_source = source_name if source_name.strip() else file.name
+                    documents.append(Document(page_content=content, metadata={"source": metadata_source}))
+        
+                st.write(f"Uploaded {len(documents)} documents.")
+        
+                chunks = split_text(documents, chunk_size, chunk_overlap, add_start_index)
+        
                 
-                st.write(f"(randomly selected, index {random_index}):")
-                st.write("Metadata:", chunks[random_index].metadata)
-                st.write({"text": chunks[random_index].page_content})
-                
-    else:
-        st.warning("Please upload at least one Markdown file.")
+    
+                if chunks:
+                    # Pick a random chunk index
+                    random_index = random.randint(0, len(chunks) - 1)
+                    
+                    st.write(f"(randomly selected, index {random_index}):")
+                    st.write("Metadata:", chunks[random_index].metadata)
+                    st.write({"text": chunks[random_index].page_content})
+                    
+        else:
+            st.warning("Please upload at least one Markdown file.")
