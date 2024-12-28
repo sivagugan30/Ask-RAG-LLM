@@ -316,11 +316,6 @@ with tabs[1]:
     
     
     
-    
-    
-    
-   import streamlit as st
-
     # Query input
     query_text = st.text_input("Enter your query:")
     
