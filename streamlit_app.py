@@ -147,57 +147,6 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
     return filtered_results
 
 
-"""
-# Streamlit UI
-st.title("Famous Five Query App")
-
-# Load data from JSON files
-json_files = [
-    "famous_five_1.json",
-    "famous_five_2.json",
-    "famous_five_3.json",
-    "famous_five_4.json",
-    "famous_five_5.json"
-]
-
-vector_dict = load_json_files(json_files)
-
-#st.write(vector_dict)
-
-# Query input
-query_text = st.text_input("Enter your query:")
-
-if query_text:
-    # Generate embeddings for the query text
-    query_embeddings = generate_query_embeddings(query_text)
-
-    # Perform a query on the data (this example checks metadata or document data)
-    st.write("Performing query...")
-    #where = {'source': '01-five-on-a-treasure-island.md'}  # Example filter, adjust as needed
-    results = query_vector_dict(
-                                vector_dict, 
-                                query_embeddings = query_embeddings,
-                                n_results=3 
-                                #,where=where
-                                )
-
-    # Display the results
-    st.write(results)
-    
-    for i in range(len(results['distances'])):
-        st.write(f"Document: {results['documents'][i]}")
-        st.write(f"Metadata: {results['metadata'][i]}")
-        st.write(f"Distance: {results['distances'][i]}")
-        
-        st.write("---")
-        
-else:
-    st.write("Please enter a query to get results.")
-
-
-
-"""
-
 
 
 
@@ -307,3 +256,98 @@ with tabs[0]:
                     
         else:
             st.warning("Please upload at least one Markdown file.")
+
+
+with tabs[1]:
+    
+
+st.title("")
+
+# Load data from JSON files
+json_files = [
+    "famous_five_1.json",
+    "famous_five_2.json",
+    "famous_five_3.json",
+    "famous_five_4.json",
+    "famous_five_5.json"
+]
+
+vector_dict = load_json_files(json_files)
+
+#st.write(vector_dict)
+
+
+
+with st.expander("Chatbot Settings", expanded=False):
+    
+    row_1 = st.columns([2, 1])
+    with row_1[0]:
+        temperature = st.slider(
+            "Temperature", min_value=0.0, max_value=1.0, value=0.7, step=0.1,
+            help="Controls the randomness of the model's responses. Higher values (closer to 1) make the output more creative."
+        )
+    
+    with row_1[1]:
+        top_p = st.slider(
+            "Top P", min_value=0.0, max_value=1.0, value=0.9, step=0.1,
+            help="Controls the diversity of responses by focusing on high-probability tokens."
+        )
+    
+    row_2 = st.columns([2, 1])
+    with row_2[0]:
+        max_tokens = st.number_input(
+            "Max Tokens", value=200, min_value=0, step=1,
+            help="Sets the maximum length of the model's response."
+        )
+    
+    with row_2[1]:
+        frequency_penalty = st.slider(
+            "Frequency Penalty", min_value=0.0, max_value=2.0, value=0.5, step=0.1,
+            help="Reduces the likelihood of repetitive words in the response."
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Query input
+query_text = st.text_input("Enter your query:")
+
+if query_text:
+    # Generate embeddings for the query text
+    query_embeddings = generate_query_embeddings(query_text)
+
+    # Perform a query on the data (this example checks metadata or document data)
+    st.write("Performing query...")
+    #where = {'source': '01-five-on-a-treasure-island.md'}  # Example filter, adjust as needed
+    results = query_vector_dict(
+                                vector_dict, 
+                                query_embeddings = query_embeddings,
+                                n_results=3 
+                                #,where=where
+                                )
+
+    # Display the results
+    st.write(results)
+    
+    for i in range(len(results['distances'])):
+        st.write(f"Document: {results['documents'][i]}")
+        st.write(f"Metadata: {results['metadata'][i]}")
+        st.write(f"Distance: {results['distances'][i]}")
+        
+        st.write("---")
+        
+else:
+    st.write("Please enter a query to get results.")
+
+
+
