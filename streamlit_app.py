@@ -116,7 +116,7 @@ st.title("Famous Five Query App")
 vector_dict = load_json_files(json_files)
 
 # Query input
-query_text = st.text_input("Enter your query:", "how many children are at breakfast-table")
+query_text = st.text_input("Enter your query:")
 
 if query_text:
     # Generate embeddings for the query text
