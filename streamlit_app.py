@@ -177,7 +177,8 @@ if query_text:
                                 )
 
     # Display the results
-    st.write(f"Found {len(results['ids'])} matching results:")
+    st.write(results)
+    
     for i in range(len(results['ids'])):
         st.write(f"ID: {results['ids'][i]}")
         st.write(f"Document: {results['documents'][i]}")
