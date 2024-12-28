@@ -57,4 +57,5 @@ vector_dict = {
 }
 
 st.write("Data loading complete. Here's the combined dictionary:")
-st.write(vector_dict['embeddings'])
+st.write(vector_dict['embeddings'].shape)
+st.write(len(vector_dict['ids']))
