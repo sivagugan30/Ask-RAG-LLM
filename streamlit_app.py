@@ -179,7 +179,7 @@ if query_text:
     # Display the results
     st.write(results)
     
-    for i in range(len(results['ids'])):
+    for i in range(len(results['distances'])):
         st.write(f"Document: {results['documents'][i]}")
         st.write(f"Metadata: {results['metadata'][i]}")
         st.write(f"Distance: {results['distances'][i]}")
