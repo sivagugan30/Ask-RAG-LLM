@@ -221,21 +221,17 @@ def load_documents(directory):
                 documents.append(Document(page_content=content, metadata={"source": filename}))
     return documents
 
-def split_text(documents):
+def split_text(documents, chunk_size, chunk_overlap, add_start_index):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=100,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
         length_function=len,
-        add_start_index=True,
+        add_start_index=add_start_index,
     )
     chunks = text_splitter.split_documents(documents)
     st.write(f"Split {len(documents)} documents into {len(chunks)} chunks.")
     return chunks
 
-st.title("Document Embedding Page")
-st.markdown("""
-This page allows you to upload Markdown documents (.md) and split them into smaller chunks for embedding.
-""")
 
 with st.form("document_input"):
     uploaded_files = st.file_uploader(
