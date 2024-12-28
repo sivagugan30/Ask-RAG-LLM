@@ -244,26 +244,28 @@ with st.form("document_input"):
 
     row_1 = st.columns([2, 1])
     with row_1[0]:
-        chunk_size = st.number_input(
-            "Chunk Size", value=300, min_value=0, step=1
-        )
+    chunk_size = st.number_input(
+        "Chunk Size", value=300, min_value=0, step=1,
+        help="Specifies the maximum number of characters in each chunk of text"
+    )
 
     with row_1[1]:
         chunk_overlap = st.number_input(
-            "Chunk Overlap", value=100, min_value=0, step=1
+            "Chunk Overlap", value=100, min_value=0, step=1,
+            help="Defines how much overlap (in characters) exists between consecutive chunks"
         )
 
     row_2 = st.columns([2, 1])
     with row_2[0]:
         source_name = st.text_input(
-            "Source Name", "Enter the name of the uploaded file or custom name",
-            help="If left empty, the uploaded file's name will be used."
+            "New Vector Store Name", "vector_store_1",
+            help="If left empty, the uploaded file's name will be used"
         )
 
     with row_2[1]:
         add_start_index = st.selectbox(
             "Add Start Index", [True, False], index=0,
-            help="Choose whether to add the start index to each chunk."
+            help="Choose whether to add the start index to each chunk"
         )
 
     save_button = st.form_submit_button("Process Documents")
