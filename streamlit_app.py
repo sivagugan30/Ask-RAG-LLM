@@ -15,10 +15,10 @@ os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 # Predefined list of JSON file paths
 json_files = [
     "sqlite/famous_five_1.json",
-    "famous_five_2.json",
-    "famous_five_3.json",
-    "famous_five_4.json",
-    "famous_five_5.json"
+    "sqlite/famous_five_2.json",
+    "sqlite/famous_five_3.json",
+    "sqlite/famous_five_4.json",
+    "sqlite/famous_five_5.json"
 ]
 
 # Function to load and process JSON data from files
