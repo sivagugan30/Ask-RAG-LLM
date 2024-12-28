@@ -6,6 +6,8 @@ import json
 import numpy as np
 from openai import OpenAI
 import os 
+from langchain.schema import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
