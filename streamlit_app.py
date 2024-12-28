@@ -335,9 +335,13 @@ with tabs[1]:
                                     n_results=3 
                                     #,where=where
                                     )
-    
-        # Display the results
-        st.write(results)
+
+        with st.expander("Retrive", expanded=False):
+            st.write(results)
+        with st.expander("Augment", expanded=False):
+            prompt = ''
+            st.write(prompt)
+          
             
     else:
         st.write("Please enter a query to get results.")
