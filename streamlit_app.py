@@ -319,70 +319,77 @@ with tabs[1]:
     
     
     
+   import streamlit as st
+
     # Query input
     query_text = st.text_input("Enter your query:")
     
-   
+    # If the button is clicked, process the RAG response
     if st.button("Generate RAG Response"):
         if query_text:
             
             # Generate embeddings for the query text
             query_embeddings = generate_query_embeddings(query_text)
-        
+            
+            # Retrieve the top 3 results using the query embeddings
             results = query_vector_dict(
-                                        vector_dict, 
-                                        query_embeddings = query_embeddings,
-                                        n_results=3 
-                                        #,where=where
-                                        )
-
+                vector_dict, 
+                query_embeddings=query_embeddings,
+                n_results=3
+                # ,where=where
+            )
+    
+            # Construct the prompt for the LLM
             prompt = f"""
-                            Basis the retrieved text chunks and the initial user query, generate a response. 
-                            
-                            Query: " {query_text} "
-                            
-                            Top 3 results: 
-                            1 >>>>> {results['documents'][0]}
-                            2 >>>>> {results['documents'][1]}
-                            3 >>>>> {results['documents'][2]}
-                            
-                            Metadata:
-                            - Source: 
-                                1 >>>>> {results['metadata'][0]['source']}
-                                2 >>>>> {results['metadata'][1]['source']}
-                                3 >>>>> {results['metadata'][2]['source']}
-                                
-                            - Start Index: 
-                                1 >>>>> {results['metadata'][0]['start_index']}
-                                2 >>>>> {results['metadata'][1]['start_index']}
-                                3 >>>>> {results['metadata'][2]['start_index']}
-                            
-                            Mention the Source and Start Index as well 
-                            
-                            
-                            If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
-                            """
+                        Basis the retrieved text chunks and the initial user query, generate a response.
+    
+                        Query: " {query_text} "
+    
+                        Top 3 results:
+                        1 >>>>> {results['documents'][0]}
+                        2 >>>>> {results['documents'][1]}
+                        3 >>>>> {results['documents'][2]}
+    
+                        Metadata:
+                        - Source:
+                            1 >>>>> {results['metadata'][0]['source']}
+                            2 >>>>> {results['metadata'][1]['source']}
+                            3 >>>>> {results['metadata'][2]['source']}
+    
+                        - Start Index:
+                            1 >>>>> {results['metadata'][0]['start_index']}
+                            2 >>>>> {results['metadata'][1]['start_index']}
+                            3 >>>>> {results['metadata'][2]['start_index']}
+    
+                        Mention the Source and Start Index as well.
+    
+                        If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
+            """
             
-            reply = OpenAI().chat.completions.create(
-                                                      model="gpt-4o",
-                                                      messages=[
-                                                        {"role": "developer", "content": "You are a helpful assistant."},
-                                                        {"role": "user", "content": prompt}
-                                                      ]
-                                                    )
-                                                    
-            print(reply.choices[0].message.content)
-
-            
-            
-            with st.expander("Retrive", expanded=False):
-                st.write(results)
+            # Make the request to OpenAI to get the response
+            try:
+                reply = OpenAI().chat.completions.create(
+                    model="gpt-4",  # Fixed model name typo from "gpt-4o" to "gpt-4"
+                    messages=[
+                        {"role": "developer", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": prompt}
+                    ]
+                )
                 
+                # Display the response content
+                st.write(reply.choices[0].message.content)
+    
+            except Exception as e:
+                st.error(f"Error generating response: {e}")
+            
+            # Display the retrieved results and prompt in expanders for transparency
+            with st.expander("Retrieve", expanded=False):
+                st.write(results)
+            
             with st.expander("Augment", expanded=False):
                 st.write(prompt)
-                #st.write("")
-    else:
-        st.write("Please enter a query to get results.")
+                
+        else:
+            st.write("Please enter a query to get results.")
     
-    
-    
+        
