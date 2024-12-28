@@ -335,11 +335,8 @@ with tabs[1]:
                                         n_results=3 
                                         #,where=where
                                         )
-    
-            with st.expander("Retrive", expanded=False):
-                st.write(results)
-            with st.expander("Augment", expanded=False):
-                prompt = f"""
+
+            prompt = f"""
                             Basis the retrieved text chunks and the initial user query, generate a response. 
                             
                             Query: " {query_text} "
@@ -365,7 +362,23 @@ with tabs[1]:
                             
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                             """
-    
+            
+            reply = OpenAI().chat.completions.create(
+                                                      model="gpt-4o",
+                                                      messages=[
+                                                        {"role": "developer", "content": "You are a helpful assistant."},
+                                                        {"role": "user", "content": prompt}
+                                                      ]
+                                                    )
+                                                    
+            print(reply.choices[0].message.content)
+
+            
+            
+            with st.expander("Retrive", expanded=False):
+                st.write(results)
+                
+            with st.expander("Augment", expanded=False):
                 st.write(prompt)
                 #st.write("")
     else:
