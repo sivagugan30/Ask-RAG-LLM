@@ -8,7 +8,7 @@ json_files = [
     "famous_five_2.json",
     "famous_five_3.json",
     "famous_five_4.json",
-    "famous_five_5.json"# Update this path as necessary
+    "famous_five_5.json"
 ]
 
 ids = []
@@ -32,12 +32,12 @@ for json_file in json_files:
     try:
         st.write("Processing JSON data.")
         
-        ids = json_data["ids"]
-        documents = json_data["documents"]
-        metadata = json_data["metadata"]
-        embeddings = json_data["embeddings"]
+        ids.extend(json_data["ids"])  # Append data to the existing list
+        documents.extend(json_data["documents"])
+        metadata.extend(json_data["metadata"])
+        embeddings.extend(json_data["embeddings"])
         
-        st.write(f"Processed data with {len(ids)} rows successfully.")
+        st.write(f"Processed data with {len(json_data['ids'])} rows successfully.")
     except KeyError as e:
         st.write(f"Error: Key {e} not found in the JSON data.")
     except Exception as e:
@@ -57,5 +57,5 @@ vector_dict = {
 }
 
 st.write("Data loading complete. Here's the combined dictionary:")
-st.write(vector_dict['embeddings'].shape)
-st.write(len(vector_dict['ids']))
+st.write(f"Shape of embeddings: {vector_dict['embeddings'].shape}")
+st.write(f"Number of IDs: {len(vector_dict['ids'])}")
