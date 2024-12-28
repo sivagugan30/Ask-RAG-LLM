@@ -100,10 +100,11 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
         documents = apply_filter(documents, where_document)
 
     # Ensure we also filter embeddings and ids based on the metadata or documents filter
-    filtered_ids = [ids[i] for i in range(len(ids)) if metadata[i] in metadata]
-    filtered_documents = [documents[i] for i in range(len(documents)) if metadata[i] in metadata]
+    # We need to ensure the filtered metadata is indexed correctly
     filtered_metadata = [metadata[i] for i in range(len(metadata)) if metadata[i] in metadata]
-    filtered_embeddings = [embeddings[i] for i in range(len(embeddings)) if metadata[i] in metadata]
+    filtered_ids = [ids[i] for i in range(len(ids)) if metadata[i] in filtered_metadata]
+    filtered_documents = [documents[i] for i in range(len(documents)) if metadata[i] in filtered_metadata]
+    filtered_embeddings = [embeddings[i] for i in range(len(embeddings)) if metadata[i] in filtered_metadata]
 
     # Calculate the cosine similarity for query_embeddings or query_texts
     if query_embeddings is not None:
@@ -138,6 +139,7 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
         filtered_results["distances"] = [similarities[0, i] for i in closest_indices.flatten()]
 
     return filtered_results
+
 
 
 # Streamlit UI
