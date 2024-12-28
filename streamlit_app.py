@@ -14,7 +14,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
 # Predefined list of JSON file paths
 json_files = [
-    "https://raw.githubusercontent.com/sivagugan30/Ask-RAG-LLM/main/sqlite/famous_five_1.json",
+    "https://raw.githubusercontent.com/sivagugan30/Ask-RAG-LLM/refs/heads/main/sqlite/famous_five_1.json",
     "sqlite/famous_five_2.json",
     "sqlite/famous_five_3.json",
     "sqlite/famous_five_4.json",
