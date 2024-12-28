@@ -322,9 +322,10 @@ with tabs[1]:
     # Query input
     query_text = st.text_input("Enter your query:")
     
-    if query_text:
-        if st.button("Generate RAG Response"):
-        
+   
+    if st.button("Generate RAG Response"):
+        if query_text:
+            
             # Generate embeddings for the query text
             query_embeddings = generate_query_embeddings(query_text)
         
@@ -364,10 +365,9 @@ with tabs[1]:
                             
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                             """
-
+    
                 st.write(prompt)
                 #st.write("")
-            
     else:
         st.write("Please enter a query to get results.")
     
