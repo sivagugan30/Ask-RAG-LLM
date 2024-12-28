@@ -146,7 +146,7 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
     return filtered_results
 
 
-
+"""
 # Streamlit UI
 st.title("Famous Five Query App")
 
@@ -161,7 +161,7 @@ json_files = [
 
 vector_dict = load_json_files(json_files)
 
-st.write(vector_dict)
+#st.write(vector_dict)
 
 # Query input
 query_text = st.text_input("Enter your query:")
@@ -192,3 +192,113 @@ if query_text:
         
 else:
     st.write("Please enter a query to get results.")
+
+
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.schema import Document
+
+def load_documents(directory):
+    documents = []
+    for filename in os.listdir(directory):
+        if filename.endswith(".md"):
+            file_path = os.path.join(directory, filename)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                documents.append(Document(page_content=content, metadata={"source": filename}))
+    return documents
+
+def split_text(documents):
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=300,
+        chunk_overlap=100,
+        length_function=len,
+        add_start_index=True,
+    )
+    chunks = text_splitter.split_documents(documents)
+    st.write(f"Split {len(documents)} documents into {len(chunks)} chunks.")
+    return chunks
+
+
+st.title("Document Embedding Page")
+st.markdown("""
+This page allows you to upload Markdown documents (.md) and split them into smaller chunks for embedding.
+""")
+
+# File upload
+uploaded_files = st.file_uploader(
+    "Upload Markdown Files", type=["md"], accept_multiple_files=True
+)
+
+# Process uploaded files
+if uploaded_files:
+    documents = []
+    for file in uploaded_files:
+        content = file.read().decode("utf-8")
+        documents.append(Document(page_content=content, metadata={"source": file.name}))
+
+    # Display document information
+    st.write(f"Uploaded {len(documents)} documents.")
+
+    # Split documents into chunks
+    chunks = split_text(documents)
+
+    # Display chunk details
+    if chunks:
+        st.write("Example chunk:")
+        st.write(chunks[0].page_content)
+        st.write("Metadata:", chunks[0].metadata)
+
+else:
+    st.warning("Please upload at least one Markdown file.")
+
+if __name__ == "__main__":
+main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
