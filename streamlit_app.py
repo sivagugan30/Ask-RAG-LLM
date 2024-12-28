@@ -377,30 +377,22 @@ with tabs[1]:
             except Exception as e:
                 st.error(f"Error generating response: {e}")
             
-            # Display the retrieved results and prompt in expanders for transparency
+            # Display the retrieved results and prompt for transparency
             with st.expander("1. Retrieve", expanded=False):
-                st.write("Based on cosine similarity, the top 3 text chunks are retrieved from the vector embeddings.")
+                st.write("Retrieved top 3 results basis cosine similarity on query embeddings.")
                 st.write(results)
             
             with st.expander("2. Augment", expanded=False):
-                st.write("""
-                            The augmented prompt is created by combining the query and retrieved documents along with their metadata. 
-                            Here’s the information used to generate the response:
-                            - Distances between the query and the retrieved documents.
-                            - The documents themselves.
-                            - The metadata, including source and start index.
-                          """)
-                st.write(f"Top 3 results:\n1. {results['documents'][0]}\n2. {results['documents'][1]}\n3. {results['documents'][2]}")
-                st.write(f"Metadata:\n- Source: {results['metadata'][0]['source']}\n- Start Index: {results['metadata'][0]['start_index']}")
+                st.write("Augmented prompt combines the query, retrieved documents, and metadata.")
+                st.write(f"Results:\n1. {results['documents'][0]}\n2. {results['documents'][1]}\n3. {results['documents'][2]}")
             
             with st.expander("3. Generate", expanded=False):
-                st.write(f"""
-                            The augmented prompt (Retrieval-Augmented input) is fed into the language model (LLM).
-                            The LLM processes the query and context to generate a relevant response, utilizing the provided documents and their metadata.
-                            
-                            The generated response in the current setup is: 
-                            " {reply.choices[0].message.content} "
-                        """)
+                st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
+                
+                Generated response: \' {reply.choices[0].message.content}\ ' 
+                "")
                                 
         else:
             st.write("Please enter a query to get results.")
+                                
+      
