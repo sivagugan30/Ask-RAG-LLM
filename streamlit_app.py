@@ -385,10 +385,12 @@ with tabs[1]:
                 st.write(prompt)
 
             with st.expander("3. Generate", expanded=False):
-                st.write("""
-                    The augmented prompt, including the top 3 retrieved results and metadata, is fed into the language model (LLM).
-                    The LLM processes the query and context to generate a relevant response, utilizing the provided documents and their metadata.
-                """)
+                st.write(f"""
+                            The augmented prompt, including the top 3 retrieved results and metadata, is fed into the language model (LLM).
+                            The LLM processes the query and context to generate a relevant response, utilizing the provided documents and their metadata.
+                            
+                            The generated response in the current setup is : f" {reply.choices[0].message.content} ".
+                        """)
                             
         else:
             st.write("Please enter a query to get results.")
