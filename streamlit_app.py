@@ -323,21 +323,23 @@ with tabs[1]:
     query_text = st.text_input("Enter your query:")
     
     if query_text:
-        # Generate embeddings for the query text
-        query_embeddings = generate_query_embeddings(query_text)
+        if st.button("Generate RAG Response"):
+        
+            # Generate embeddings for the query text
+            query_embeddings = generate_query_embeddings(query_text)
+        
+            results = query_vector_dict(
+                                        vector_dict, 
+                                        query_embeddings = query_embeddings,
+                                        n_results=3 
+                                        #,where=where
+                                        )
     
-        results = query_vector_dict(
-                                    vector_dict, 
-                                    query_embeddings = query_embeddings,
-                                    n_results=3 
-                                    #,where=where
-                                    )
-
-        with st.expander("Retrive", expanded=False):
-            st.write(results)
-        with st.expander("Augment", expanded=False):
-            prompt = ''
-            st.write(prompt)
+            with st.expander("Retrive", expanded=False):
+                st.write(results)
+            with st.expander("Augment", expanded=False):
+                prompt = ''
+                st.write(prompt)
           
             
     else:
