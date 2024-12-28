@@ -1,6 +1,7 @@
-import json
 import numpy as np
 import streamlit as st
+from sklearn.metrics.pairwise import cosine_similarityimport json
+import numpy as np
 from openai import OpenAI
 import os 
 
