@@ -366,7 +366,7 @@ with tabs[1]:
                             """
 
                 #st.write(prompt)
-          
+                st.write("")
             
     else:
         st.write("Please enter a query to get results.")
