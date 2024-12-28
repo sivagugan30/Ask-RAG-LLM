@@ -284,9 +284,10 @@ with st.form("document_input"):
             if chunks:
                 # Pick a random chunk index
                 random_index = random.randint(0, len(chunks) - 1)
-                st.write(f"Example chunk (randomly selected, index {random_index}):")
-                st.write(chunks[random_index].page_content)
+                
+                st.write(f"(randomly selected, index {random_index}):")
                 st.write("Metadata:", chunks[random_index].metadata)
-
-            else:
-                st.warning("Please upload at least one Markdown file.")
+                st.write({"text": chunks[random_index].page_content})
+                
+    else:
+        st.warning("Please upload at least one Markdown file.")
