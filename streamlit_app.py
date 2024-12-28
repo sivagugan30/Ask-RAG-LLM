@@ -365,7 +365,7 @@ with tabs[1]:
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                             """
 
-                st.write(prompt)
+                #st.write(prompt)
           
             
     else:
