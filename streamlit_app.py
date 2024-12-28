@@ -1,3 +1,4 @@
+import random
 import numpy as np
 import streamlit as st
 import sklearn
@@ -278,9 +279,14 @@ with st.form("document_input"):
     
             chunks = split_text(documents, chunk_size, chunk_overlap, add_start_index)
     
+            
+
             if chunks:
-                st.write("Example chunk:")
-                st.write(chunks[0].page_content)
-                st.write("Metadata:", chunks[0].metadata)
-        else:
-            st.warning("Please upload at least one Markdown file.")
+                # Pick a random chunk index
+                random_index = random.randint(0, len(chunks) - 1)
+                st.write(f"Example chunk (randomly selected, index {random_index}):")
+                st.write(chunks[random_index].page_content)
+                st.write("Metadata:", chunks[random_index].metadata)
+
+            else:
+                st.warning("Please upload at least one Markdown file.")
