@@ -378,12 +378,18 @@ with tabs[1]:
                 st.error(f"Error generating response: {e}")
             
             # Display the retrieved results and prompt in expanders for transparency
-            with st.expander("Retrieve", expanded=False):
+            with st.expander("1. Retrieve", expanded=False):
                 st.write(results)
             
-            with st.expander("Augment", expanded=False):
+            with st.expander("2. Augment", expanded=False):
                 st.write(prompt)
-                
+
+            with st.expander("3. Generate", expanded=False):
+                st.write("""
+                    The augmented prompt, including the top 3 retrieved results and metadata, is fed into the language model (LLM).
+                    The LLM processes the query and context to generate a relevant response, utilizing the provided documents and their metadata.
+                """)
+                            
         else:
             st.write("Please enter a query to get results.")
     
