@@ -382,9 +382,20 @@ with tabs[1]:
                 st.write("Retrieved top 3 results basis cosine similarity on query embeddings.")
                 st.write(results)
             
+            # Augment: Combine QUERY, TEXT, and METADATA
             with st.expander("2. Augment", expanded=False):
-                st.write("Augmented prompt combines the query, retrieved documents, and metadata.")
-                st.write(f"Results:\n1. {results['documents'][0]}\n2. {results['documents'][1]}\n3. {results['documents'][2]}")
+                st.write("Augmented prompt combines the following elements:")
+                st.write("QUERY: The initial user query is provided.")
+                st.write(f"QUERY: {query_text}")
+                
+                st.write("TEXT: Fragments of the top 3 results retrieved.")
+                st.write(f"TEXT: \n1. {results['documents'][0]}\n2. {results['documents'][1]}\n3. {results['documents'][2]}")
+                
+                st.write("METADATA: The metadata associated with the top 3 results.")
+                st.write(f"METADATA: \n1. Source: {results['metadata'][0]['source']}, Start Index: {results['metadata'][0]['start_index']}")
+                st.write(f"2. Source: {results['metadata'][1]['source']}, Start Index: {results['metadata'][1]['start_index']}")
+                st.write(f"3. Source: {results['metadata'][2]['source']}, Start Index: {results['metadata'][2]['start_index']}")
+
             
             with st.expander("3. Generate", expanded=False):
                 st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
