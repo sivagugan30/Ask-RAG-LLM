@@ -387,12 +387,12 @@ with tabs[1]:
             with st.expander("1. Retrieve", expanded=False):
                 st.write("Retrieved top 3 results basis cosine similarity on query embeddings.")
                 
-                result1 = {
+                results1 = {
                             "distances" : results["distances"],
                             "documents" : results["documents"],
                             "metadata"  : results["metadata"],
                         }
-
+                
                 
                 st.write(results1)
             
