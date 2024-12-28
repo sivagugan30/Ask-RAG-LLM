@@ -265,40 +265,5 @@ if uploaded_files:
 else:
     st.warning("Please upload at least one Markdown file.")
 
-if __name__ == "__main__":
-main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
