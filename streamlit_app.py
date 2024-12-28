@@ -161,6 +161,8 @@ json_files = [
 
 vector_dict = load_json_files(json_files)
 
+st.write(vector_dict)
+
 # Query input
 query_text = st.text_input("Enter your query:")
 
