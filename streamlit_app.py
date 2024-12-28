@@ -223,15 +223,24 @@ def load_documents(directory):
     return documents
 
 def split_text(documents, chunk_size, chunk_overlap, add_start_index):
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        length_function=len,
-        add_start_index=add_start_index,
-    )
-    chunks = text_splitter.split_documents(documents)
-    st.write(f"Split {len(documents)} documents into {len(chunks)} chunks.")
-    return chunks
+    # Check for invalid overlap value
+    if chunk_overlap > chunk_size:
+        st.warning("Chunk Overlap cannot be greater than Chunk Size. Please adjust the values and try again.")
+        return []
+
+    try:
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            length_function=len,
+            add_start_index=add_start_index,
+        )
+        chunks = text_splitter.split_documents(documents)
+        st.write(f"Split {len(documents)} documents into {len(chunks)} chunks.")
+        return chunks
+    except ValueError as e:
+        st.error(f"An error occurred while splitting the documents: {e}")
+        return []
 
 
 with st.form("document_input"):
