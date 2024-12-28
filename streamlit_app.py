@@ -232,38 +232,44 @@ def split_text(documents):
     st.write(f"Split {len(documents)} documents into {len(chunks)} chunks.")
     return chunks
 
-
 st.title("Document Embedding Page")
 st.markdown("""
 This page allows you to upload Markdown documents (.md) and split them into smaller chunks for embedding.
 """)
 
-# File upload
-uploaded_files = st.file_uploader(
-    "Upload Markdown Files", type=["md"], accept_multiple_files=True
-)
+with st.form("document_input"):
+    uploaded_files = st.file_uploader(
+        "Upload Markdown Files", type=["md"], accept_multiple_files=True
+    )
 
-# Process uploaded files
-if uploaded_files:
-    documents = []
-    for file in uploaded_files:
-        content = file.read().decode("utf-8")
-        documents.append(Document(page_content=content, metadata={"source": file.name}))
+    row_1 = st.columns([2, 1])
+    with row_1[0]:
+        chunk_size = st.number_input(
+            "Chunk Size", value=300, min_value=0, step=1
+        )
 
-    # Display document information
-    st.write(f"Uploaded {len(documents)} documents.")
+    with row_1[1]:
+        chunk_overlap = st.number_input(
+            "Chunk Overlap", value=100, min_value=0, step=1
+        )
 
-    # Split documents into chunks
-    chunks = split_text(documents)
+    save_button = st.form_submit_button("Process Documents")
 
-    # Display chunk details
-    if chunks:
-        st.write("Example chunk:")
-        st.write(chunks[0].page_content)
-        st.write("Metadata:", chunks[0].metadata)
+if save_button:
+    if uploaded_files:
+        documents = []
+        for file in uploaded_files:
+            content = file.read().decode("utf-8")
+            documents.append(Document(page_content=content, metadata={"source": file.name}))
 
-else:
-    st.warning("Please upload at least one Markdown file.")
+        st.write(f"Uploaded {len(documents)} documents.")
 
+        chunks = split_text(documents, chunk_size, chunk_overlap)
 
+        if chunks:
+            st.write("Example chunk:")
+            st.write(chunks[0].page_content)
+            st.write("Metadata:", chunks[0].metadata)
+    else:
+        st.warning("Please upload at least one Markdown file.")
 
