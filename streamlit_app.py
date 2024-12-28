@@ -338,7 +338,33 @@ with tabs[1]:
             with st.expander("Retrive", expanded=False):
                 st.write(results)
             with st.expander("Augment", expanded=False):
-                prompt = ''
+                prompt = f"""
+                            Basis the retrieved text chunks and the initial user query, generate a response. 
+                            
+                            Query: " {query_text} "
+                            
+                            Top 3 results: 
+                            1 >>>>> {results['documents'][0]}
+                            2 >>>>> {results['documents'][1]}
+                            3 >>>>> {results['documents'][2]}
+                            
+                            Metadata:
+                            - Source: 
+                                1 >>>>> {results['metadata'][0]['source']}
+                                2 >>>>> {results['metadata'][1]['source']}
+                                3 >>>>> {results['metadata'][2]['source']}
+                                
+                            - Start Index: 
+                                1 >>>>> {results['metadata'][0]['start_index']}
+                                2 >>>>> {results['metadata'][1]['start_index']}
+                                3 >>>>> {results['metadata'][2]['start_index']}
+                            
+                            Mention the Source and Start Index as well 
+                            
+                            
+                            If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
+                            """
+
                 st.write(prompt)
           
             
