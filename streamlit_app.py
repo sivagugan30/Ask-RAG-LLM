@@ -385,7 +385,8 @@ with tabs[1]:
             
             # Display the retrieved results and prompt for transparency
             with st.expander("1. Retrieve", expanded=False):
-                st.write("Retrieved top 3 results basis cosine similarity on query embeddings.")
+                st.write("_Retrieved top 3 results basis Cosine Similarity on query embeddings and vector database_")
+
                 
                 results1 = {
                             "distances" : results["distances"],
