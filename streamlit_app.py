@@ -202,7 +202,7 @@ tabs = st.tabs(["Document Embedding", "RAG Chatbot"])
 
 
 with tabs[0]:
-    st.markdown("### Convert Words to Numerical Representation")
+    st.markdown("### Convert Text to Numerical Representation")
     
     with st.form("document_input"):
         uploaded_files = st.file_uploader(
