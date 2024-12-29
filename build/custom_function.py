@@ -10,8 +10,6 @@ import os
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-
-
 # Function to load and process JSON data from files
 def load_json_files(json_files):
     ids = []
@@ -67,8 +65,6 @@ def generate_query_embeddings(query_text):
     query_embeddings = np.array(query_embeddings).reshape(1, -1)
     return query_embeddings
 
-
-# Define the query_vector_dict function
 def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_results=3, where=None, where_document=None, include=["metadatas", "documents", "distances"]):
     """
     Query the vector_dict to find the closest neighbors.
@@ -135,24 +131,6 @@ def query_vector_dict(vector_dict, query_texts=None, query_embeddings=None, n_re
 
     return filtered_results
 
-
-
-
-
-
-
-
-
-
-
-
-
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.schema import Document
-
-
-
-
 def load_documents(directory):
     documents = []
     for filename in os.listdir(directory):
@@ -162,8 +140,6 @@ def load_documents(directory):
                 content = f.read()
                 documents.append(Document(page_content=content, metadata={"source": filename}))
     return documents
-
-
 
 def split_text(documents, chunk_size, chunk_overlap, add_start_index):
     # Check for invalid overlap value
