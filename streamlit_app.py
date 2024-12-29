@@ -14,7 +14,7 @@ from custom_function import print_hello
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
-print_hello()  
+f"print_hello()  "
 
 """
 # Set Streamlit app config for a wider layout and light theme
