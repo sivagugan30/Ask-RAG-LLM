@@ -411,7 +411,8 @@ with tabs[1]:
                 
                 st.write(" Augment = User Query + Retrived results ")
                 st.write(f" /n User Query : {query_text} ")
-                st.write(f" /n Retrived Results : {results1} ")
+                st.write(f" /n Retrived Results :  ")
+                st.write({results1})
             
             with st.expander("3. Generate", expanded=False):
                 st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
