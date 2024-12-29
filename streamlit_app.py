@@ -425,10 +425,10 @@ with tabs[1]:
 
             
             with st.expander("3. Generate", expanded=False):
-                st.write("Augmented prompt is passed to the LLM for generating a response")
+                st.write("_Augmented prompt is passed to the LLM for generating a response_")
                 st.code(f"Generated response: '{reply.choices[0].message.content}'")
                                 
         else:
-            st.write("Please enter a query to get results.")
+            st.warning("Please enter a query to get results.")
                                 
       
