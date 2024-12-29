@@ -202,14 +202,33 @@ tabs = st.tabs(["Document Embedding", "RAG Chatbot"])
 
 
 with tabs[0]:
+    
     st.markdown("<p style='font-size: 30px;'>Convert <strong>Text</strong> to <strong>Numerical Representation</strong></p>", unsafe_allow_html=True)
-
-
     
     with st.form("document_input"):
-        uploaded_files = st.file_uploader(
-            "Upload Markdown Files", type=["md"], accept_multiple_files=True
-        )
+        # Dropdown to choose between uploading a file or pasting text
+        input_type = st.selectbox("Choose Input Type", ["Upload Markdown File", "Paste Text"])
+
+        if input_type == "Upload Markdown File":
+            uploaded_files = st.file_uploader(
+                "Upload Markdown Files", type=["md"], accept_multiple_files=True
+            )
+            documents = []
+            if uploaded_files:
+                for file in uploaded_files:
+                    content = file.read().decode("utf-8")
+                    metadata_source = source_name if source_name.strip() else file.name
+                    documents.append(Document(page_content=content, metadata={"source": metadata_source}))
+                st.write(f"Uploaded {len(documents)} documents.")
+        
+        elif input_type == "Paste Text":
+            pasted_text = st.text_area("Paste your text here (max 500 words)", height=200)
+            if len(pasted_text.split()) > 500:
+                st.warning("Text exceeds 500 words. Please limit your input to 500 words.")
+            elif pasted_text:
+                # If the user pastes text, treat it as a document
+                documents = [Document(page_content=pasted_text, metadata={"source": "Pasted Text"})]
+
     
         row_1 = st.columns([2, 1])
         with row_1[0]:
