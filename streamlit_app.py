@@ -202,7 +202,7 @@ tabs = st.tabs(["Document Embedding", "RAG Chatbot"])
 
 
 with tabs[0]:
-    st.header("Document Embedding")
+    st.markdown("### Convert Words to Numerical Representation")
     
     with st.form("document_input"):
         uploaded_files = st.file_uploader(
@@ -235,7 +235,7 @@ with tabs[0]:
                 help="Choose whether to add the start index to each chunk"
             )
     
-        save_button = st.form_submit_button("Process Documents")
+        save_button = st.form_submit_button("Generate Vector DB ")
     
         if save_button:
             if uploaded_files:
