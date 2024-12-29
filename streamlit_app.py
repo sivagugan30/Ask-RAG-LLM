@@ -348,7 +348,7 @@ with tabs[1]:
                             2 >>>>> {results['metadata'][1]['start_index']}
                             3 >>>>> {results['metadata'][2]['start_index']}
             
-                        Mention the Source and Start Index as well seperately in a two new line . The answer should be structured and simple. 
+                        Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
             
                         If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
             """
