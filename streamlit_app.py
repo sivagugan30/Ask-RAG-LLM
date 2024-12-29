@@ -14,7 +14,7 @@ import custom_function as cf
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
-
+f' {cf.print_hello()} '
 
 """
 # Set Streamlit app config for a wider layout and light theme
