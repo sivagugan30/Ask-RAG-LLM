@@ -202,7 +202,7 @@ tabs = st.tabs(["Document Embedding", "RAG Chatbot"])
 
 
 with tabs[0]:
-    st.markdown("### Convert <span style='color:red'>_Text_</span> to <span style='color:blue'>_Numerical Representation_</span>", unsafe_allow_html=True)
+    st.markdown("### Convert <span style='color:red'>_Text_</span> to <span style='color:#1E90FF'>_Numerical Representation_</span>", unsafe_allow_html=True)
 
 
     
