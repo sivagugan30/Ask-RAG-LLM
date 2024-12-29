@@ -284,7 +284,7 @@ with tabs[1]:
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
     
     # If the button is clicked, process the RAG response
-    if st.button("Generate RAG Response"):
+    if st.button("Generate Response"):
         if query_text:
             
             # Generate embeddings for the query text
