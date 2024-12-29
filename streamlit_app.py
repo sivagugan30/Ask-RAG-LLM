@@ -385,7 +385,7 @@ with tabs[1]:
             
             # Display the retrieved results and prompt for transparency
             with st.expander("1. Retrieve", expanded=False):
-                st.write("_Retrieved top 3 results basis Cosine Similarity on query embeddings and vector database_")
+                st.write("_Retrieved top 3 results basis Cosine Similarity on user prompt's embeddings and vector database_")
 
                 
                 results1 = {
@@ -417,7 +417,7 @@ with tabs[1]:
             # Display the shortened version in Streamlit
             with st.expander("2. Augment", expanded=False):
                 st.code(f"""
-                Augmention = User Query + Retrieved Results 
+                Augmention = User Prompt + Retrieved Results 
                 """)
                 st.code(f"User query : ' {query_text} ' ")
                 st.code("Retrived Results : ")
@@ -425,10 +425,8 @@ with tabs[1]:
 
             
             with st.expander("3. Generate", expanded=False):
-                st.write(f"The augmented prompt is fed into the LLM to generate a response. ")
-                
-                st.code('Generated response : \' {reply.choices[0].message.content}\ ')
-                st.code('print(Generated response)')
+                st.write("Augmented prompt is passed to the LLM for generating a response")
+                st.code(f"Generated response: '{reply.choices[0].message.content}'")
                                 
         else:
             st.write("Please enter a query to get results.")
