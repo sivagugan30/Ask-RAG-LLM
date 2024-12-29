@@ -396,24 +396,20 @@ with tabs[1]:
                 
                 st.write(results1)
             
-                # Truncate each value in "distances"
+                # Truncate each value in "distances" to two decimal places
                 short_distances = [
-                    str(d)[:10] + "..." if len(str(d)) > 10 else str(d)
-                    for d in results1["distances"]
+                    round(d, 2) for d in results1["distances"]
                 ]
                 
-                # Truncate each document to 10 characters
+                # Truncate each document to 10 characters and append "..." if needed
                 short_documents = [
                     doc[:10] + "..." if len(doc) > 10 else doc
                     for doc in results1["documents"]
                 ]
                 
-                # Truncate each metadata dictionary value to 10 characters
+                # Extract only the truncated "source" from metadata and limit to 10 characters
                 short_metadata = [
-                    {
-                        key: str(value)[:10] + "..." if len(str(value)) > 10 else str(value)
-                        for key, value in metadata.items()
-                    }
+                    metadata["source"][:10] + "..." if len(metadata["source"]) > 10 else metadata["source"]
                     for metadata in results1["metadata"]
                 ]
                 
@@ -423,7 +419,7 @@ with tabs[1]:
                     "documents": short_documents,
                     "metadata": short_metadata,
                 }
-                
+
             # Display the shortened version in Streamlit
             with st.expander("2. Augment", expanded=False):
                 st.write("Augment = User Query + Retrieved Results")
