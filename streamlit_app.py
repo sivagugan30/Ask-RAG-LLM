@@ -284,33 +284,33 @@ with tabs[1]:
     
     
     
-    with st.expander("Chatbot Settings", expanded=False):
+    # with st.expander("Chatbot Settings", expanded=False):
         
-        row_1 = st.columns([2, 1])
-        with row_1[0]:
-            temperature = st.slider(
-                "Temperature", min_value=0.0, max_value=1.0, value=0.5, step=0.1,
-                help="Controls the randomness of the model's responses. Higher values (closer to 1) make the output more creative."
-            )
+    #     row_1 = st.columns([2, 1])
+    #     with row_1[0]:
+    #         temperature = st.slider(
+    #             "Temperature", min_value=0.0, max_value=1.0, value=0.5, step=0.1,
+    #             help="Controls the randomness of the model's responses. Higher values (closer to 1) make the output more creative."
+    #         )
         
-        with row_1[1]:
-            top_p = st.slider(
-                "Top P", min_value=0.0, max_value=1.0, value=0.5, step=0.1,
-                help="Controls the diversity of responses by focusing on high-probability tokens."
-            )
+    #     with row_1[1]:
+    #         top_p = st.slider(
+    #             "Top P", min_value=0.0, max_value=1.0, value=0.5, step=0.1,
+    #             help="Controls the diversity of responses by focusing on high-probability tokens."
+    #         )
         
-        row_2 = st.columns([2, 1])
-        with row_2[0]:
-            max_tokens = st.number_input(
-                "Max Tokens", value=200, min_value=0, step=1,
-                help="Sets the maximum length of the model's response."
-            )
+    #     row_2 = st.columns([2, 1])
+    #     with row_2[0]:
+    #         max_tokens = st.number_input(
+    #             "Max Tokens", value=200, min_value=0, step=1,
+    #             help="Sets the maximum length of the model's response."
+    #         )
         
-        with row_2[1]:
-            frequency_penalty = st.slider(
-                "Frequency Penalty", min_value=0.0, max_value=2.0, value=1.0, step=0.1,
-                help="Reduces the likelihood of repetitive words in the response."
-            )
+    #     with row_2[1]:
+    #         frequency_penalty = st.slider(
+    #             "Frequency Penalty", min_value=0.0, max_value=2.0, value=1.0, step=0.1,
+    #             help="Reduces the likelihood of repetitive words in the response."
+    #         )
     
     
     
@@ -398,18 +398,20 @@ with tabs[1]:
             
             # Augment: Combine QUERY, TEXT, and METADATA
             with st.expander("2. Augment", expanded=False):
-                st.write("Augmented prompt combines the following elements:")
-                st.write("QUERY: The initial user query is provided.")
-                st.write(f"QUERY: {query_text}")
+                # Function to summarize results
+                def summarize_results(results, char_limit=100):
+                    return {
+                        "distances": results["distances"][:5],  # Show first 5 distances
+                        "documents": [doc[:char_limit] + "..." if len(doc) > char_limit else doc for doc in results["documents"]],
+                        "metadata": {key: str(value)[:char_limit] + "..." if len(str(value)) > char_limit else value for key, value in results["metadata"].items()},
+                    }
                 
-                st.write("TEXT: Fragments of the top 3 results retrieved.")
-                st.write(f"TEXT: \n1. {results['documents'][0]}\n2. {results['documents'][1]}\n3. {results['documents'][2]}")
+                # Shortened version of results1
+                shortened_results1 = summarize_results(results1)
                 
-                st.write("METADATA: The metadata associated with the top 3 results.")
-                st.write(f"METADATA: \n1. Source: {results['metadata'][0]['source']}, Start Index: {results['metadata'][0]['start_index']}")
-                st.write(f"2. Source: {results['metadata'][1]['source']}, Start Index: {results['metadata'][1]['start_index']}")
-                st.write(f"3. Source: {results['metadata'][2]['source']}, Start Index: {results['metadata'][2]['start_index']}")
-
+                st.write(" Augment = User Query + Retrived results ")
+                st.seitr(f" /n User Query : {query_text} ")
+                st.write(f" /n Retrived Results : {shortened_results1} ")
             
             with st.expander("3. Generate", expanded=False):
                 st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
