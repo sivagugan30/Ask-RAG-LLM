@@ -415,7 +415,7 @@ with tabs[1]:
 
             # Display the shortened version in Streamlit
             with st.expander("2. Augment", expanded=False):
-                st.write("Augment = User Query + Retrieved Results")
+                st.write("\'Augment = User Query + Retrieved Results \' ")
                 st.write(f"User query: {query_text}")
                 st.write("Retrived Results : ")
                 st.write(shortened_results)  # Display results in JSON-like format
