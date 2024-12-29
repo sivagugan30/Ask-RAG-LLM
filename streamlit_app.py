@@ -280,10 +280,6 @@ with tabs[1]:
     
     vector_dict = load_json_files(json_files)
     
-    #st.write(vector_dict)
-    
-    
-    
     # with st.expander("Chatbot Settings", expanded=False):
         
     #     row_1 = st.columns([2, 1])
@@ -311,16 +307,6 @@ with tabs[1]:
     #             "Frequency Penalty", min_value=0.0, max_value=2.0, value=1.0, step=0.1,
     #             help="Reduces the likelihood of repetitive words in the response."
     #         )
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     # Query input with default value
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
