@@ -397,27 +397,23 @@ with tabs[1]:
                 st.write(results1)
             
                 # Truncate each value in "distances" to two decimal places
-                short_distances = [
-                    round(d, 2) for d in results1["distances"]
-                ]
-                
-                # Truncate each document to 10 characters and append "..." if needed
+                # Process documents: truncate to 10 characters and add "..." if necessary
                 short_documents = [
-                    doc[:10] + "..." if len(doc) > 10 else doc
-                    for doc in results1["documents"]
+                    results1["documents"][i][:10] + "..." if len(results1["documents"][i]) > 10 else results1["documents"][i]
+                    for i in range(3)
                 ]
                 
-                # Extract only the truncated "source" from metadata and limit to 10 characters
+                # Process metadata: truncate "source" to 10 characters only
                 short_metadata = [
-                    metadata["source"][:10] + "..." if len(metadata["source"]) > 10 else metadata["source"]
-                    for metadata in results1["metadata"]
+                    results1["metadata"][i]["source"][:10] + "..." if len(results1["metadata"][i]["source"]) > 10 else results1["metadata"][i]["source"]
+                    for i in range(3)
                 ]
                 
-                # Construct the shortened dictionary
-                shortened_results1 = {
+                # Combine the processed results into the desired output format
+                shortened_results = {
                     "distances": short_distances,
                     "documents": short_documents,
-                    "metadata": short_metadata,
+                    "metadata": short_metadata
                 }
 
             # Display the shortened version in Streamlit
