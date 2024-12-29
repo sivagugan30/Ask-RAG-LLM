@@ -378,7 +378,7 @@ with tabs[1]:
                 )
                 
                 # Display the response content
-                st.sucess(reply.choices[0].message.content)
+                st.success(reply.choices[0].message.content)
                 
             except Exception as e:
                 st.error(f"Error generating response: {e}")
