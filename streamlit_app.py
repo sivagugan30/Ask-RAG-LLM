@@ -12,10 +12,12 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 import custom_function as cf
 
+from custom_function import print_hello as a 
+
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
-f' cf.print_hello() '
-
+f' {cf.print_hello()} '
+f' {a()} '
 """
 # Set Streamlit app config for a wider layout and light theme
 st.set_page_config(layout="wide", page_title="", initial_sidebar_state="expanded")
