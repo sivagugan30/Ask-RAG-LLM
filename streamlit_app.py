@@ -207,7 +207,7 @@ with tabs[0]:
     
     with st.form("document_input"):
         # Dropdown to choose between existing documents, uploading a file, or pasting text
-        input_type = st.selectbox("Choose Input Type", ["Select from Existing Documents", "Upload Markdown File", "Paste Text"])
+        input_type = st.radio("Choose Input Type", ["Select from Existing Documents", "Upload Markdown File", "Paste Text"])
 
         documents = []  # List to hold the documents
 
