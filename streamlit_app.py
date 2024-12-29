@@ -16,8 +16,15 @@ from custom_function import print_hello as a
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
-f' {cf.print_hello()} '
-f' {a()} '
+
+text = cf.print_hello()
+
+text1 = a()
+
+st.write(text)
+
+st.write(text1)
+
 """
 # Set Streamlit app config for a wider layout and light theme
 st.set_page_config(layout="wide", page_title="", initial_sidebar_state="expanded")
