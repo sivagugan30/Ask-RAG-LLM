@@ -12,6 +12,49 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
+"""
+# Set Streamlit app config for a wider layout and light theme
+st.set_page_config(layout="wide", page_title="", initial_sidebar_state="expanded")
+
+
+# Page navigation state
+if 'page' not in st.session_state:
+    st.session_state.page = 'home'
+
+
+# Sidebar for navigation
+st.sidebar.title("Navigation")
+options = st.sidebar.radio("Select a Section", 
+                            ["Home", "Instructions", "Document Embedding", "RAG Agent", "Chat-bot", "Scope"])
+
+# Function to handle navigation
+if options == "Home":
+    st.session_state.page = "home"
+    st.write("Welcome to the Home Page!")
+    
+elif options == "Instructions":
+    st.session_state.page = "instructions"
+    st.write("Here are the Instructions for using the app.")
+
+elif options == "Document Embedding":
+    st.session_state.page = "document_embedding"
+    st.write("Upload your documents here to generate embeddings.")
+
+elif options == "RAG Agent":
+    st.session_state.page = "rag_agent"
+    st.write("This section is for the RAG Agent.")
+
+elif options == "Chat-bot":
+    st.session_state.page = "chat_bot"
+    st.write("Interact with the Chat-bot here!")
+
+elif options == "Scope":
+    st.session_state.page = "scope"
+    st.write("Explore the Scope of the application here.")
+
+else:
+    st.warning("Invalid Selection. Please choose a valid section.")
+"""
 
 # Predefined list of JSON file paths
 json_files = [
@@ -67,6 +110,7 @@ def load_json_files(json_files):
 
     return vector_dict
 
+import custom_functions as a 
 
 # Function to generate embeddings for a query using OpenAI API
 def generate_query_embeddings(query_text):
