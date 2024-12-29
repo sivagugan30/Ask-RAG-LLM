@@ -10,7 +10,7 @@ import os
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from custom_functions import print_hello  
+from custom_function import print_hello  
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
