@@ -10,11 +10,11 @@ import os
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from custom_function import print_hello  
+import custom_function as cf
 
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
-f"print_hello()  "
+
 
 """
 # Set Streamlit app config for a wider layout and light theme
