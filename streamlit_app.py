@@ -396,23 +396,41 @@ with tabs[1]:
                 
                 st.write(results1)
             
-            # Augment: Combine QUERY, TEXT, and METADATA
-            with st.expander("2. Augment", expanded=False):
-                # Function to summarize results
-                def summarize_results(results, char_limit=100):
-                    return {
-                        "distances": results["distances"][:5],  # Show first 5 distances
-                        "documents": [doc[:char_limit] + "..." if len(doc) > char_limit else doc for doc in results["documents"]],
-                        "metadata": {key: str(value)[:char_limit] + "..." if len(str(value)) > char_limit else value for key, value in results["metadata"].items()},
+                # Truncate each value in "distances"
+                short_distances = [
+                    str(d)[:10] + "..." if len(str(d)) > 10 else str(d)
+                    for d in results1["distances"]
+                ]
+                
+                # Truncate each document to 10 characters
+                short_documents = [
+                    doc[:10] + "..." if len(doc) > 10 else doc
+                    for doc in results1["documents"]
+                ]
+                
+                # Truncate each metadata dictionary value to 10 characters
+                short_metadata = [
+                    {
+                        key: str(value)[:10] + "..." if len(str(value)) > 10 else str(value)
+                        for key, value in metadata.items()
                     }
+                    for metadata in results1["metadata"]
+                ]
                 
-                # Shortened version of results1
-                #shortened_results1 = summarize_results(results1)
+                # Construct the shortened dictionary
+                shortened_results1 = {
+                    "distances": short_distances,
+                    "documents": short_documents,
+                    "metadata": short_metadata,
+                }
                 
-                st.write(" Augment = User Query + Retrived results ")
-                st.write(f" /n User Query : {query_text} ")
-                st.write(f" /n Retrived Results :  ")
-                st.write(results1)
+                # Display the shortened version in Streamlit
+                with st.expander("2. Augment", expanded=False):
+                    st.write("Augment = User Query + Retrieved Results")
+                    st.write(f"User query: {query_text}")
+                    st.write('Retrived Results : ")
+                    st.json(shortened_results1)  # Display results in JSON-like format
+
             
             with st.expander("3. Generate", expanded=False):
                 st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
