@@ -267,7 +267,7 @@ with tabs[0]:
 with tabs[1]:
     
     
-    st.title(" Retrieval-Augmented Generation (RAG) ")
+    st.markdown(" Retrieval-Augmented Generation (RAG) ")
     
     # Load data from JSON files
     json_files = [
