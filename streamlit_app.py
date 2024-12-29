@@ -425,7 +425,7 @@ with tabs[1]:
                 st.write("Augment = User Query + Retrieved Results")
                 st.write(f"User query: {query_text}")
                 st.write("Retrived Results : ")
-                st.json(shortened_results1)  # Display results in JSON-like format
+                st.json(short_distances)  # Display results in JSON-like format
 
             
             with st.expander("3. Generate", expanded=False):
