@@ -267,7 +267,7 @@ with tabs[0]:
 with tabs[1]:
     
     
-    st.title("")
+    st.title(" Retrieval-Augmented Generation (RAG) ")
     
     # Load data from JSON files
     json_files = [
@@ -368,7 +368,9 @@ with tabs[1]:
                 
             except Exception as e:
                 st.error(f"Error generating response: {e}")
-            
+
+
+            st.write("RAG = Retrive + Augment + Generate ")
             # Display the retrieved results and prompt for transparency
             with st.expander("1. Retrieve", expanded=False):
                 st.write("_Retrieved top 3 results basis Cosine Similarity on user prompt's embeddings and vector database_")
