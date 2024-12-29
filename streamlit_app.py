@@ -424,10 +424,10 @@ with tabs[1]:
 
             
             with st.expander("3. Generate", expanded=False):
-                st.write(f"""The augmented prompt is fed into the LLM to generate a response. 
+                st.write(f"The augmented prompt is fed into the LLM to generate a response. ")
                 
-                Generated response: \' {reply.choices[0].message.content}\ ' 
-                """)
+                st.code('Generated response : \' {reply.choices[0].message.content}\ ')
+                st.code('print(Generated response)')
                                 
         else:
             st.write("Please enter a query to get results.")
