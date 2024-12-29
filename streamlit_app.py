@@ -410,7 +410,7 @@ with tabs[1]:
                 #shortened_results1 = summarize_results(results1)
                 
                 st.write(" Augment = User Query + Retrived results ")
-                st.seitr(f" /n User Query : {query_text} ")
+                st.write(f" /n User Query : {query_text} ")
                 st.write(f" /n Retrived Results : {results1} ")
             
             with st.expander("3. Generate", expanded=False):
