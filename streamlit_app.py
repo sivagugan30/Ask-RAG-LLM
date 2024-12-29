@@ -206,21 +206,30 @@ with tabs[0]:
     st.markdown("<p style='font-size: 30px;'>Convert <strong>Text</strong> to <strong>Numerical Representation</strong></p>", unsafe_allow_html=True)
     
     with st.form("document_input"):
-        # Dropdown to choose between uploading a file or pasting text
-        input_type = st.selectbox("Choose Input Type", ["Upload Markdown File", "Paste Text"])
+        # Dropdown to choose between existing documents, uploading a file, or pasting text
+        input_type = st.selectbox("Choose Input Type", ["Select from Existing Documents", "Upload Markdown File", "Paste Text"])
 
-        if input_type == "Upload Markdown File":
+        documents = []  # List to hold the documents
+
+        if input_type == "Select from Existing Documents":
+            # Example: List of pre-existing documents (this can be replaced by your actual source of documents)
+            existing_documents = ["Doc 1", "Doc 2", "Doc 3"]  # Replace with your actual document list
+            selected_doc = st.selectbox("Select a Document", existing_documents)
+
+            # Add selected document content (for demo, using placeholder text)
+            documents = [Document(page_content=f"Content of {selected_doc}", metadata={"source": selected_doc})]
+
+        elif input_type == "Upload Markdown File":
             uploaded_files = st.file_uploader(
                 "Upload Markdown Files", type=["md"], accept_multiple_files=True
             )
-            documents = []
             if uploaded_files:
                 for file in uploaded_files:
                     content = file.read().decode("utf-8")
                     metadata_source = source_name if source_name.strip() else file.name
                     documents.append(Document(page_content=content, metadata={"source": metadata_source}))
                 st.write(f"Uploaded {len(documents)} documents.")
-        
+
         elif input_type == "Paste Text":
             pasted_text = st.text_area("Paste your text here (max 500 words)", height=200)
             if len(pasted_text.split()) > 500:
@@ -229,6 +238,8 @@ with tabs[0]:
                 # If the user pastes text, treat it as a document
                 documents = [Document(page_content=pasted_text, metadata={"source": "Pasted Text"})]
 
+        # Text chunking options
+        row_1 = st.columns([2, 1])
     
         row_1 = st.columns([2, 1])
         with row_1[0]:
