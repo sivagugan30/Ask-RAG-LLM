@@ -396,14 +396,11 @@ with tabs[1]:
                 
                 st.write(results1)
             
-                # Truncate each value in "distances" to two decimal places
-                # Process documents: truncate to 10 characters and add "..." if necessary
+                short_distances = [round(results1["distances"][i], 2) for i in range(3)]
                 short_documents = [
                     results1["documents"][i][:10] + "..." if len(results1["documents"][i]) > 10 else results1["documents"][i]
                     for i in range(3)
                 ]
-                
-                # Process metadata: truncate "source" to 10 characters only
                 short_metadata = [
                     results1["metadata"][i]["source"][:10] + "..." if len(results1["metadata"][i]["source"]) > 10 else results1["metadata"][i]["source"]
                     for i in range(3)
@@ -421,7 +418,7 @@ with tabs[1]:
                 st.write("Augment = User Query + Retrieved Results")
                 st.write(f"User query: {query_text}")
                 st.write("Retrived Results : ")
-                st.json(short_distances)  # Display results in JSON-like format
+                st.json(shortened_results)  # Display results in JSON-like format
 
             
             with st.expander("3. Generate", expanded=False):
