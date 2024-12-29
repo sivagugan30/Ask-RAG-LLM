@@ -10,6 +10,8 @@ import os
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+from custom_functions import print_hello  
+
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 
 """
@@ -109,8 +111,6 @@ def load_json_files(json_files):
 
 
     return vector_dict
-
-import custom_functions as a 
 
 # Function to generate embeddings for a query using OpenAI API
 def generate_query_embeddings(query_text):
