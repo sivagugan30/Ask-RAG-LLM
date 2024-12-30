@@ -135,8 +135,8 @@ elif options == "Understand RAG":
     
     st.title("Retrieval-Augmented Generation(RAG)")
 
-    st.write("_RAG improves answers by first retrieving relevant information from a database, then using a model to generate accurate, context-aware responses._") 
-    st.write("_RAG is used when the LLM doesn't have enough context on its own._")
+    st.write("• _RAG improves answers by first retrieving relevant information from a database, then using a model to generate accurate, context-aware responses._") 
+    st.write("• _RAG is used when the LLM doesn't have enough context on its own._")
     st.write(" ")
     query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
