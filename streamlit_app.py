@@ -243,15 +243,15 @@ elif options == "Understand RAG":
     
                                 Query: " {query_text} "
                                 
-                                Top 3 results: 
-                                \t 1 : {shortened_results['documents'][0]} | d = {shortened_results['distances'][0]} 
-                                \t 2 : {shortened_results['documents'][1]} | d = {shortened_results['distances'][1]} 
-                                \t 3 : {shortened_results['documents'][2]} | d = {shortened_results['distances'][2]} 
+                                Top 3 results: \n
+                                \t 1 : {shortened_results['documents'][0]} | d = {shortened_results['distances'][0]} \n
+                                \t 2 : {shortened_results['documents'][1]} | d = {shortened_results['distances'][1]} \n
+                                \t 3 : {shortened_results['documents'][2]} | d = {shortened_results['distances'][2]} \n
                             
-                                Metadata(source): 
-                                \t 1 : {shortened_results['metadata'][0]} 
-                                \t 2 : {shortened_results['metadata'][1]} 
-                                \t 3 : {shortened_results['metadata'][2]}
+                                Metadata(source): \n
+                                \t 1 : {shortened_results['metadata'][0]} \n
+                                \t 2 : {shortened_results['metadata'][1]} \n
+                                \t 3 : {shortened_results['metadata'][2]} 
                             """
 
                     
