@@ -184,13 +184,13 @@ elif options == "Understand RAG":
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                 """
                 
-                short_distances = [round(results1["distances"][i], 2) for i in range(3)]
+                short_distances = [round(results["distances"][i], 2) for i in range(3)]
                 short_documents = [
-                    results1["documents"][i][:10] + "..." if len(results1["documents"][i]) > 10 else results1["documents"][i]
+                    results["documents"][i][:10] + "..." if len(results["documents"][i]) > 10 else results["documents"][i]
                     for i in range(3)
                 ]
                 short_metadata = [
-                    results1["metadata"][i]["source"][:10] + "..." if len(results1["metadata"][i]["source"]) > 10 else results1["metadata"][i]["source"]
+                    results["metadata"][i]["source"][:10] + "..." if len(results["metadata"][i]["source"]) > 10 else results["metadata"][i]["source"]
                     for i in range(3)
                 ]
                 
@@ -204,7 +204,7 @@ elif options == "Understand RAG":
                 prompt = f"""
                             Hey LLL, below is the user query and the results. Please paraphrase a response.
 
-                            Query: "{query_text}"
+                            Query: " {query_text} "
                             
                             Top 3 results:
                             1 >>>>> {shortened_results['documents'][0]} | Distance: {shortened_results['distances'][0]}
