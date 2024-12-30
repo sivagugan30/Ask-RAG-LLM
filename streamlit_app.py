@@ -25,7 +25,7 @@ json_files = [
 # Sidebar navigation
 st.sidebar.title("Navigation")
 options = st.sidebar.radio("Select a Section", [
-    "Home", "Instructions", "Document Embedding", "RAG", "Chat-bot", "What's Next?"
+    "Home", "Instructions", "RAG", "Chat-bot", "What's Next?"
 ])
 
 # Home Section
