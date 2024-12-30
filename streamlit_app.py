@@ -51,7 +51,7 @@ elif options == "RAG":
     
     st.markdown("### Retrieval-Augmented Generation (RAG)")
     
-    query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
+    query_text = st.text_input("Enter your query: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
     if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
 
