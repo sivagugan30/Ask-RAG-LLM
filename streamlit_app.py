@@ -111,113 +111,115 @@ elif options == "Chat-bot":
     st.markdown("### Retrieval-Augmented Generation (RAG)")
     
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
-    
-    if query_text:
-        
-            vector_dict1 = cf.load_json_files(json_files)
+
+    if st.button("Generate Response", key="generate_button", help="Click to initise the RAG model", use_container_width=True):
+
+        if query_text:
             
-            # Generate embeddings for the query text
-            query_embeddings = cf.generate_query_embeddings(query_text)
-            
-            # Retrieve the top 3 results using the query embeddings
-            results = cf.query_vector_dict(
-                vector_dict1, 
-                query_embeddings=query_embeddings,
-                n_results=3
-            )
-            
-            # Construct the prompt for the LLM
-            prompt = f"""
-                        Basis the retrieved text chunks and the initial user query, generate a response.
-            
-                        Query: " {query_text} "
-            
-                        Top 3 results:
-                        1 >>>>> {results['documents'][0]}
-                        2 >>>>> {results['documents'][1]}
-                        3 >>>>> {results['documents'][2]}
-            
-                        Metadata:
-                        - Source:
-                            1 >>>>> {results['metadata'][0]['source']}
-                            2 >>>>> {results['metadata'][1]['source']}
-                            3 >>>>> {results['metadata'][2]['source']}
-            
-                        - Start Index:
-                            1 >>>>> {results['metadata'][0]['start_index']}
-                            2 >>>>> {results['metadata'][1]['start_index']}
-                            3 >>>>> {results['metadata'][2]['start_index']}
-            
-                        Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
-            
-                        If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
-            """
-            
-            # Make the request to OpenAI to get the response
-            try:
-                reply = OpenAI().chat.completions.create(
-                    model="gpt-4",  # Fixed model name typo from "gpt-4o" to "gpt-4"
-                    messages=[
-                        {"role": "developer", "content": "You are a helpful assistant"},
-                        {"role": "user", "content": prompt}
-                    ]
+                vector_dict1 = cf.load_json_files(json_files)
+                
+                # Generate embeddings for the query text
+                query_embeddings = cf.generate_query_embeddings(query_text)
+                
+                # Retrieve the top 3 results using the query embeddings
+                results = cf.query_vector_dict(
+                    vector_dict1, 
+                    query_embeddings=query_embeddings,
+                    n_results=3
                 )
                 
-                # Display the response content
-                st.success(reply.choices[0].message.content)
+                # Construct the prompt for the LLM
+                prompt = f"""
+                            Basis the retrieved text chunks and the initial user query, generate a response.
                 
-            except Exception as e:
-                st.error(f"Error generating response: {e}")
-
-
-            st.write("  RAG = Retrive + Augment + Generate ")
-            # Display the retrieved results and prompt for transparency
-            with st.expander("1. Retrieve", expanded=False):
-                st.write("_Retrieved top 3 results basis Cosine Similarity on user prompt's embeddings and vector database_")
-
+                            Query: " {query_text} "
                 
-                results1 = {
-                            "distances" : results["distances"],
-                            "documents" : results["documents"],
-                            "metadata"  : results["metadata"],
-                        }
+                            Top 3 results:
+                            1 >>>>> {results['documents'][0]}
+                            2 >>>>> {results['documents'][1]}
+                            3 >>>>> {results['documents'][2]}
                 
+                            Metadata:
+                            - Source:
+                                1 >>>>> {results['metadata'][0]['source']}
+                                2 >>>>> {results['metadata'][1]['source']}
+                                3 >>>>> {results['metadata'][2]['source']}
                 
-                st.write(results1)
-            
-                short_distances = [round(results1["distances"][i], 2) for i in range(3)]
-                short_documents = [
-                    results1["documents"][i][:10] + "..." if len(results1["documents"][i]) > 10 else results1["documents"][i]
-                    for i in range(3)
-                ]
-                short_metadata = [
-                    results1["metadata"][i]["source"][:10] + "..." if len(results1["metadata"][i]["source"]) > 10 else results1["metadata"][i]["source"]
-                    for i in range(3)
-                ]
+                            - Start Index:
+                                1 >>>>> {results['metadata'][0]['start_index']}
+                                2 >>>>> {results['metadata'][1]['start_index']}
+                                3 >>>>> {results['metadata'][2]['start_index']}
                 
-                # Combine the processed results into the desired output format
-                shortened_results = {
-                    "distances": short_distances,
-                    "documents": short_documents,
-                    "metadata": short_metadata
-                }
-
-            # Display the shortened version in Streamlit
-            with st.expander("2. Augment", expanded=False):
-                st.code(f"""
-                Augmention = User Prompt + Retrieved Results 
-                """)
-                st.code(f"User query : ' {query_text} ' ")
-                st.code("Retrived Results : ")
-                st.write(shortened_results)  # Display results in JSON-like format
-
-            
-            with st.expander("3. Generate", expanded=False):
-                st.write("_Augmented prompt is passed to the LLM for generating a response_")
-                st.code(f"Generated response: '{reply.choices[0].message.content}'")
-                                
-    else:
-        st.warning("Please enter a query to get results")
+                            Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
+                
+                            If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
+                """
+                
+                # Make the request to OpenAI to get the response
+                try:
+                    reply = OpenAI().chat.completions.create(
+                        model="gpt-4",  # Fixed model name typo from "gpt-4o" to "gpt-4"
+                        messages=[
+                            {"role": "developer", "content": "You are a helpful assistant"},
+                            {"role": "user", "content": prompt}
+                        ]
+                    )
+                    
+                    # Display the response content
+                    st.success(reply.choices[0].message.content)
+                    
+                except Exception as e:
+                    st.error(f"Error generating response: {e}")
+    
+    
+                st.write("  RAG = Retrive + Augment + Generate ")
+                # Display the retrieved results and prompt for transparency
+                with st.expander("1. Retrieve", expanded=False):
+                    st.write("_Retrieved top 3 results basis Cosine Similarity on user prompt's embeddings and vector database_")
+    
+                    
+                    results1 = {
+                                "distances" : results["distances"],
+                                "documents" : results["documents"],
+                                "metadata"  : results["metadata"],
+                            }
+                    
+                    
+                    st.write(results1)
+                
+                    short_distances = [round(results1["distances"][i], 2) for i in range(3)]
+                    short_documents = [
+                        results1["documents"][i][:10] + "..." if len(results1["documents"][i]) > 10 else results1["documents"][i]
+                        for i in range(3)
+                    ]
+                    short_metadata = [
+                        results1["metadata"][i]["source"][:10] + "..." if len(results1["metadata"][i]["source"]) > 10 else results1["metadata"][i]["source"]
+                        for i in range(3)
+                    ]
+                    
+                    # Combine the processed results into the desired output format
+                    shortened_results = {
+                        "distances": short_distances,
+                        "documents": short_documents,
+                        "metadata": short_metadata
+                    }
+    
+                # Display the shortened version in Streamlit
+                with st.expander("2. Augment", expanded=False):
+                    st.code(f"""
+                    Augmention = User Prompt + Retrieved Results 
+                    """)
+                    st.code(f"User query : ' {query_text} ' ")
+                    st.code("Retrived Results : ")
+                    st.write(shortened_results)  # Display results in JSON-like format
+    
+                
+                with st.expander("3. Generate", expanded=False):
+                    st.write("_Augmented prompt is passed to the LLM for generating a response_")
+                    st.code(f"Generated response: '{reply.choices[0].message.content}'")
+                                    
+        else:
+            st.warning("Please enter a query to get results")
 
 
 # What's Next Section
