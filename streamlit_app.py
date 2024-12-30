@@ -204,15 +204,14 @@ elif options == "Understand RAG":
                 st.markdown("###  RAG = Retrive + Augment + Generate ")
                 # Display the retrieved results and prompt for transparency
                 with st.expander("1. Retrieve", expanded=False):
-                    st.write("_Retrieved top 3 results basis Cosine Similarity on user prompt's embeddings and vector database_")
     
+                    st.write("_Cosine Similarity is applied to the user prompt's embeddings and the vector database to RETRIEVE the most relevant results._")
                     
                     results1 = {
                                 "distances" : results["distances"],
                                 "documents" : results["documents"],
                                 "metadata"  : results["metadata"],
                             }
-                    
                     
                     st.write(results1)
                 
@@ -235,7 +234,7 @@ elif options == "Understand RAG":
     
                 # Display the shortened version in Streamlit
                 with st.expander("2. Augment", expanded=False):
-                   st.write("_Instead of feeding just the query to the LLM, we enhance(augment) the query by adding retrieved results for better response generation._")
+                    st.write("_Instead of feeding just the query to the LLM, we AUGMENT the query by adding retrieved results for better response generation._")
                     st.code(f"""
                     Augmention = User Prompt + Retrieved Results 
                     """)
@@ -245,7 +244,7 @@ elif options == "Understand RAG":
     
                 
                 with st.expander("3. Generate", expanded=False):
-                    st.write("_Augmented prompt is passed to the LLM for generating a response_")
+                    st.write("_Now, the augmented prompt (user prompt with results) is fed to the LLM to GENERATE a response._")
                     st.code(f"Generated response: '{reply.choices[0].message.content}'")
                                     
         else:
