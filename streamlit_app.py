@@ -133,7 +133,7 @@ elif options == "Instructions":
 elif options == "Understand RAG":
     #st.title("RAG Chatbot")
     
-    st.markdown("### Retrieval-Augmented Generation(RAG)")
+    st.title("Retrieval-Augmented Generation(RAG)")
     
     query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
@@ -197,7 +197,7 @@ elif options == "Understand RAG":
                     st.error(f"Error generating response: {e}")
     
     
-                st.write("  RAG = Retrive + Augment + Generate ")
+                st.markdown("###  RAG = Retrive + Augment + Generate ")
                 # Display the retrieved results and prompt for transparency
                 with st.expander("1. Retrieve", expanded=False):
                     st.write("_Retrieved top 3 results basis Cosine Similarity on user prompt's embeddings and vector database_")
