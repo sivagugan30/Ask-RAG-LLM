@@ -109,6 +109,7 @@ elif options == "Chat-bot":
     vector_dict1 = cf.load_json_files(json_files)
     
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
+    
     if query_text:
             
             # Generate embeddings for the query text
@@ -212,8 +213,8 @@ elif options == "Chat-bot":
                 st.write("_Augmented prompt is passed to the LLM for generating a response_")
                 st.code(f"Generated response: '{reply.choices[0].message.content}'")
                                 
-        else:
-            st.warning("Please enter a query to get results")
+    else:
+        st.warning("Please enter a query to get results")
 
 
 # What's Next Section
