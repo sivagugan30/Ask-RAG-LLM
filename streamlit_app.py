@@ -25,7 +25,7 @@ json_files = [
 # Sidebar navigation
 st.sidebar.title("Navigation")
 options = st.sidebar.radio("Select a Section", [
-    "Home", "Instructions", "RAG", "Chat-bot", "What's Next?"
+    "Home", "Instructions", "Understand RAG", "Chat-bot", "What's Next?"
 ])
 
 # Home Section
@@ -130,10 +130,10 @@ elif options == "Instructions":
 
 
 # Chat-bot Section
-elif options == "RAG":
+elif options == "Understand RAG":
     #st.title("RAG Chatbot")
     
-    st.markdown("### Understanding Retrieval-Augmented Generation(RAG)")
+    st.markdown("### Retrieval-Augmented Generation(RAG)")
     
     query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
