@@ -106,21 +106,22 @@ elif options == "Chat-bot":
     
     st.markdown("### Retrieval-Augmented Generation (RAG)")
     
-    vector_dict1 = cf.load_json_files(json_files)
+    
     
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
     
     if query_text:
+        
+            vector_dict1 = cf.load_json_files(json_files)
             
             # Generate embeddings for the query text
             query_embeddings = cf.generate_query_embeddings(query_text)
             
             # Retrieve the top 3 results using the query embeddings
             results = cf.query_vector_dict(
-                vector_dict, 
+                vector_dict1, 
                 query_embeddings=query_embeddings,
                 n_results=3
-                # ,where=where
             )
             
             # Construct the prompt for the LLM
