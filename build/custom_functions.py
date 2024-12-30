@@ -1,3 +1,4 @@
+import base64
 import random
 import numpy as np
 import streamlit as st
