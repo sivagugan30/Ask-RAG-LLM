@@ -40,13 +40,15 @@ elif options == "Chat-bot":
     st.sidebar.write("### What's Making Waves:")
     st.sidebar.write("1. What does Elon Musk see as the biggest misconception about AI's future, and how will it evolve in the next five years?")
     st.sidebar.write("2. How does Sam Altman view the balance between AI innovation and ethical safeguards in daily life?")
-    st.title("Chat-bot")
+    st.title("RAG Chat-bot")
     
     st.markdown("""
-    ### Ask a Question to the Chat-bot
-    
-    You can ask questions related to the embedded documents, and the AI will generate an answer based on the context of the documents.
-    """)
+            ### Ask Tech Top Voices with RAG-powered LLM
+            
+            Ask questions related to tech leaders' insights, and get answers generated using RAG with LLM.
+            """)
+
+
 
     # Initialize session state for conversation history
     if 'messages' not in st.session_state:
@@ -130,11 +132,11 @@ elif options == "Instructions":
 
 # Chat-bot Section
 elif options == "RAG":
-    st.title("RAG Chatbot")
+    #st.title("RAG Chatbot")
     
-    st.markdown("### Retrieval-Augmented Generation (RAG)")
+    st.markdown("### Understanding Retrieval-Augmented Generation(RAG)")
     
-    query_text = st.text_input("Enter your query: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
+    query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
     if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
 
