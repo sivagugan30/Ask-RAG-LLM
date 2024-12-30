@@ -184,41 +184,6 @@ elif options == "Understand RAG":
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                 """
                 
-                short_distances = [round(results["distances"][i], 2) for i in range(3)]
-                short_documents = [
-                    results["documents"][i][:10] + "..." if len(results["documents"][i]) > 10 else results["documents"][i]
-                    for i in range(3)
-                ]
-                short_metadata = [
-                    results["metadata"][i]["source"][:10] + "..." if len(results["metadata"][i]["source"]) > 10 else results["metadata"][i]["source"]
-                    for i in range(3)
-                ]
-                
-                # Combine the processed results into the desired output format
-                shortened_results = {
-                    "distances": short_distances,
-                    "documents": short_documents,
-                    "metadata": short_metadata
-                }
-
-                prompt = f"""
-                            Hey LLL, below is the user query and the results. Please paraphrase a response.
-
-                            Query: " {query_text} "
-                            
-                            Top 3 results:
-                            1 >>>>> {shortened_results['documents'][0]} | Distance: {shortened_results['distances'][0]}
-                            2 >>>>> {shortened_results['documents'][1]} | Distance: {shortened_results['distances'][1]}
-                            3 >>>>> {shortened_results['documents'][2]} | Distance: {shortened_results['distances'][2]}
-                            
-                            Metadata:
-                            1 >>>>> {shortened_results['metadata'][0]}
-                            2 >>>>> {shortened_results['metadata'][1]}
-                            3 >>>>> {shortened_results['metadata'][2]}
-                        """
-
-
-                
                 # Make the request to OpenAI to get the response
                 try:
                     reply = OpenAI().chat.completions.create(
@@ -253,16 +218,60 @@ elif options == "Understand RAG":
                 
                     
     
-                # Display the shortened version in Streamlit
-                with st.expander("2. Augment", expanded=False):
-                    st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
-                    st.code(f"""
-                    Augmention = User Prompt + Retrieved Results 
-                    """)
-                    st.code(f"User query : ' {query_text} ' ")
-                    st.code("Retrived Results : ")
-                    st.write(shortened_results)  # Display results in JSON-like format
+                    # Display the shortened version in Streamlit
+                    with st.expander("2. Augment", expanded=False):
     
+                        short_distances = [round(results["distances"][i], 2) for i in range(3)]
+                    short_documents = [
+                        results["documents"][i][:10] + "..." if len(results["documents"][i]) > 10 else results["documents"][i]
+                        for i in range(3)
+                    ]
+                    short_metadata = [
+                        results["metadata"][i]["source"][:10] + "..." if len(results["metadata"][i]["source"]) > 10 else results["metadata"][i]["source"]
+                        for i in range(3)
+                    ]
+                    
+                    # Combine the processed results into the desired output format
+                    shortened_results = {
+                        "distances": short_distances,
+                        "documents": short_documents,
+                        "metadata": short_metadata
+                    }
+    
+                    prompt1 = f"""
+                                Hey LLL, below is the user query and the results. Please paraphrase a response.
+    
+                                Query: " {query_text} "
+                                
+                                Top 3 results:
+                                1 >>>>> {shortened_results['documents'][0]} | Distance: {shortened_results['distances'][0]}
+                                2 >>>>> {shortened_results['documents'][1]} | Distance: {shortened_results['distances'][1]}
+                                3 >>>>> {shortened_results['documents'][2]} | Distance: {shortened_results['distances'][2]}
+                                
+                                Metadata:
+                                1 >>>>> {shortened_results['metadata'][0]}
+                                2 >>>>> {shortened_results['metadata'][1]}
+                                3 >>>>> {shortened_results['metadata'][2]}
+                            """
+
+                    
+                    
+                    st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
+                    
+                    st.code("""
+                    def augment_prompt(user_prompt, retrieved_results):
+                        
+                        'This function takes the user's prompt and retrieved results,
+                        and combines them into a single, powerful augmented prompt!'
+                        
+                        augmented_prompt = user_prompt + " " + " ".join(retrieved_results)
+                        
+                        return augmented_prompt
+                    """)
+                    
+                    st.write('Augmented Prompt (redacted version):')
+                    st.write(prompt1)  # Display results in JSON-like format
+                    
                 
                 with st.expander("3. Generate", expanded=False):
                     st.write("Finally, the augmented prompt (user prompt with results) is fed to the LLM to **GENERATE** a response._")
