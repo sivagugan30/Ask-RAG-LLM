@@ -270,7 +270,7 @@ elif options == "Understand RAG":
                     """)
                     
                     st.write('Augmented Prompt (redacted version):')
-                    st.write(prompt1)
+                    st.info(prompt1)
                 
                 
                 with st.expander("3. Generate", expanded=False):
