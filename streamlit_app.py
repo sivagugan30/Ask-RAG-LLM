@@ -45,7 +45,7 @@ elif options == "Chat-bot":
     
     st.markdown("""
             
-            Ask questions related to tech leaders' perspectives, and get answers generated using RAG with LLM.
+            Ask questions on tech leaders' perspectives, and get answers generated using RAG with LLM.
             """)
 
 
