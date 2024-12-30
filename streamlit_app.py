@@ -258,7 +258,7 @@ elif options == "Understand RAG":
                     
                     st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
                     
-                    st.write('Augmented Prompt (redacted version):')
+                    st.code('Augmented Prompt (redacted version): ')
                     st.info(prompt1)
                 
                 
