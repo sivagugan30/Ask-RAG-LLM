@@ -239,7 +239,7 @@ elif options == "Understand RAG":
                     }
     
                     prompt1 = f"""
-                                Hey LLL, below is the user query and the results. Please paraphrase a response.
+                                Hey LLM, below is the user query and the relevent results. Paraphrase a response.
     
                                 Query: " {query_text} "
                                 
