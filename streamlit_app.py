@@ -34,6 +34,84 @@ if options == "Home":
     st.title("Welcome to the Ask-RAG-LLM Application")
     st.markdown(""" """)
 
+# Chat-bot Section
+elif options == "Chat-bot":
+    st.title("Chat-bot")
+    
+    st.markdown("""
+    ### Ask a Question to the Chat-bot
+    
+    You can ask questions related to the embedded documents, and the AI will generate an answer based on the context of the documents.
+    """)
+
+    # Initialize session state for conversation history
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
+
+    # User input for the query
+    user_input = st.chat_input("Ask me anything about the documents:")
+
+    if user_input:
+        # Add the user input to the conversation history
+        st.session_state.messages.append({"role": "user", "content": user_input})
+
+        # Process the input to get a response from the model
+        vector_dict = cf.load_json_files(json_files)
+        query_embeddings = cf.generate_query_embeddings(user_input)
+        
+        # Retrieve top results based on the query embeddings
+        results = cf.query_vector_dict(vector_dict, query_embeddings=query_embeddings, n_results=3)
+
+        # Construct the prompt for the LLM
+        prompt = f"""
+                    Based on the retrieved documents and user query, generate a response.
+
+                    Query: " {user_input} "
+
+                    Top 3 results:
+                    1 >>>>> {results['documents'][0]}
+                    2 >>>>> {results['documents'][1]}
+                    3 >>>>> {results['documents'][2]}
+
+                    Metadata:
+                    - Source:
+                        1 >>>>> {results['metadata'][0]['source']}
+                        2 >>>>> {results['metadata'][1]['source']}
+                        3 >>>>> {results['metadata'][2]['source']}
+
+                    - Start Index:
+                        1 >>>>> {results['metadata'][0]['start_index']}
+                        2 >>>>> {results['metadata'][1]['start_index']}
+                        3 >>>>> {results['metadata'][2]['start_index']}
+
+                    If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
+        """
+        
+        try:
+            # Make the request to OpenAI to get the response
+            reply = OpenAI().chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "developer", "content": "You are a helpful assistant"},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+
+            # Display the response
+            assistant_reply = reply.choices[0].message.content
+            st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
+        
+        except Exception as e:
+            st.session_state.messages.append({"role": "assistant", "content": f"Error generating response: {e}"})
+
+    # Display chat history
+    for message in st.session_state.messages:
+        if message['role'] == "user":
+            st.chat_message("user").markdown(message['content'])
+        else:
+            st.chat_message("assistant").markdown(message['content'])
+
+    
 # Instructions Section
 elif options == "Instructions":
     st.title("Instructions")
