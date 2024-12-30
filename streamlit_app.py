@@ -30,7 +30,7 @@ options = st.sidebar.radio("Select a Section", [
 
 # Home Section
 if options == "Home":
-    cf.set_background(image_path='elon_musk.webp')
+    cf.set_background(image_path='sam_altman.png')
     st.title("Welcome to the Ask-RAG-LLM Application")
     st.markdown(""" """)
 
@@ -134,7 +134,10 @@ elif options == "Understand RAG":
     #st.title("RAG Chatbot")
     
     st.title("Retrieval-Augmented Generation(RAG)")
-    
+
+    st.write("RAG improves answers by first retrieving relevant information from a database, then using a model to generate accurate, context-aware responses.") 
+    st.write("It is used when the LLM doesn't have enough context on its own.")
+    st.write(" ")
     query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
     if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
