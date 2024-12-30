@@ -43,7 +43,6 @@ elif options == "Chat-bot":
     st.title("RAG Chat-bot")
     
     st.markdown("""
-            ### Ask Tech Top Voices with RAG-powered LLM
             
             Ask questions related to tech leaders' insights, and get answers generated using RAG with LLM.
             """)
