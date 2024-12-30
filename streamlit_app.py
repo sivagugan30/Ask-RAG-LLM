@@ -37,12 +37,14 @@ if options == "Home":
 elif options == "Instructions":
     st.title("Instructions")
     
-    st.write("**Steps to Use the App:**")
-    st.write("1. Navigate to **Document Embedding** to upload or select text for vector database generation.")
-    st.write("2. Use **Chat-bot** to query the embedded documents and retrieve AI-enhanced answers.")
-    st.write("3. Explore **What's Next?** for advanced usage suggestions and future updates.")
+    st.write("1. **Document Embedding**: Upload or select text for vector database generation.")
+    st.write("2. **Chat-bot**: Query the embedded documents and retrieve AI-enhanced answers.")
+    st.write("3. **What's Next?**: Explore advanced usage suggestions and future updates.")
+    
+    st.write("")
+    st.write("I have tried to make it simple and easy to use. Hope you find the app useful :) ")
 
-
+    
 # Document Embedding Section
 elif options == "Document Embedding":
     st.title("Document Embedding")
