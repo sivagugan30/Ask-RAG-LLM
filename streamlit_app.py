@@ -31,7 +31,7 @@ options = st.sidebar.radio("Select a Section", [
 # Home Section
 if options == "Home":
     cf.set_background(image_path='sam_altman.png')
-    st.title("Welcome to the Ask-RAG-LLM Application")
+    st.title("Welcome!")
     st.markdown(""" """)
 
 # Chat-bot Section
