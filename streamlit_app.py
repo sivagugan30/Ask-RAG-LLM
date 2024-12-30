@@ -30,7 +30,7 @@ options = st.sidebar.radio("Select a Section", [
 
 # Home Section
 if options == "Home":
-    cf.set_background(image_path='satya_nadella.jpg')
+    cf.set_background(image_path='elon_musk.webp')
     st.title("Welcome to the Ask-RAG-LLM Application")
     st.markdown(""" """)
 
