@@ -147,7 +147,8 @@ elif options == "Chat-bot":
 # What's Next Section
 elif options == "What's Next?":
     st.title("What's Next?")
-    st.markdown("""Explore advanced features and future updates:
+    st.markdown("""
+    Explore advanced features and future updates:
 
     - **Advanced Querying:** Enable filtering by metadata or embedding scores.
     - **Improved UI/UX:** Design enhancements for a seamless experience.
