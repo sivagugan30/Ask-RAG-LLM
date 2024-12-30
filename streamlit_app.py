@@ -36,12 +36,12 @@ if options == "Home":
 # Instructions Section
 elif options == "Instructions":
     st.title("Instructions")
-    st.markdown("""**Steps to Use the App:**
+    
+    st.write("**Steps to Use the App:**")
+    st.write("1. Navigate to **Document Embedding** to upload or select text for vector database generation.")
+    st.write("2. Use **Chat-bot** to query the embedded documents and retrieve AI-enhanced answers.")
+    st.write("3. Explore **What's Next?** for advanced usage suggestions and future updates.")
 
-    1. Navigate to **Document Embedding** to upload or select text for vector database generation.
-    2. Use **Chat-bot** to query the embedded documents and retrieve AI-enhanced answers.
-    3. Explore **What's Next?** for advanced usage suggestions and future updates.
-    """)
 
 # Document Embedding Section
 elif options == "Document Embedding":
@@ -105,8 +105,6 @@ elif options == "Chat-bot":
     st.title("RAG Chatbot")
     
     st.markdown("### Retrieval-Augmented Generation (RAG)")
-    
-    
     
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
     
