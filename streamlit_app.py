@@ -205,7 +205,7 @@ elif options == "Understand RAG":
                 # Display the retrieved results and prompt for transparency
                 with st.expander("1. Retrieve", expanded=False):
     
-                    st.write("_Cosine Similarity is applied to the user prompt's embeddings and the vector database to RETRIEVE the most relevant results._")
+                    st.write("_Cosine Similarity is applied to the user prompt's embeddings and the vector database to **RETRIEVE** the most relevant results._")
                     
                     results1 = {
                                 "distances" : results["distances"],
@@ -234,7 +234,7 @@ elif options == "Understand RAG":
     
                 # Display the shortened version in Streamlit
                 with st.expander("2. Augment", expanded=False):
-                    st.write("_Instead of feeding just the query to the LLM, we AUGMENT the query by adding retrieved results for better response generation._")
+                    st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
                     st.code(f"""
                     Augmention = User Prompt + Retrieved Results 
                     """)
@@ -244,7 +244,7 @@ elif options == "Understand RAG":
     
                 
                 with st.expander("3. Generate", expanded=False):
-                    st.write("_Now, the augmented prompt (user prompt with results) is fed to the LLM to GENERATE a response._")
+                    st.write("_Now, the augmented prompt (user prompt with results) is fed to the LLM to **GENERATE** a response._")
                     st.code(f"Generated response: '{reply.choices[0].message.content}'")
                                     
         else:
