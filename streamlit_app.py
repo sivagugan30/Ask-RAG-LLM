@@ -9,6 +9,7 @@ from openai import OpenAI
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import build.custom_functions as cf
+import faiss
 
 # Set up API Key
 os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
