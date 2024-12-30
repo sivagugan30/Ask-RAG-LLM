@@ -41,7 +41,7 @@ elif options == "Chatbot":
     st.sidebar.write("1. What is Elon Musk's view on the biggest opportunity for AI in the next decade, and how might it impact missions to Mars?")
     st.sidebar.write("2. How does Sam Altman view the balance between AI innovation and ethical safeguards in daily life?")
     st.sidebar.write("3. What does Jensen Huang think is the next big leap for GPUs in advancing AI?")
-    st.title("RAG Chat-bot")
+    st.title("RAG-Chatbot")
     
     st.markdown("""
             
