@@ -25,7 +25,7 @@ json_files = [
 # Sidebar navigation
 st.sidebar.title("Navigation")
 options = st.sidebar.radio("Select a Section", [
-    "Home", "Instructions", "Understand RAG", "Chat-bot", "What's Next?"
+    "Home", "Instructions", "Understand RAG", "Chatbot", "What's Next?"
 ])
 
 # Home Section
@@ -35,7 +35,7 @@ if options == "Home":
     st.markdown(""" """)
 
 # Chat-bot Section
-elif options == "Chat-bot":
+elif options == "Chatbot":
     # Sample Questions
     st.sidebar.write("### What's Making Waves:")
     st.sidebar.write("1. What is Elon Musk's view on the biggest opportunity for AI in the next decade, and how might it impact missions to Mars?")
