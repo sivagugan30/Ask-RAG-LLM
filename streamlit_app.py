@@ -235,6 +235,7 @@ elif options == "Understand RAG":
     
                 # Display the shortened version in Streamlit
                 with st.expander("2. Augment", expanded=False):
+                   st.write("_Instead of feeding just the query to the LLM, we enhance(augment) the query by adding retrieved results for better response generation._")
                     st.code(f"""
                     Augmention = User Prompt + Retrieved Results 
                     """)
