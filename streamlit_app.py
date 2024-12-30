@@ -106,18 +106,19 @@ elif options == "Chat-bot":
     
     st.markdown("### Retrieval-Augmented Generation (RAG)")
     
-    vector_dict = cf.load_json_files(json_files)
+    vector_dict1 = cf.load_json_files(json_files)
     
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
     if st.button("Generate Response"):
         if query_text:
             query_embeddings = cf.generate_query_embeddings(query_text)
             
-            results = cf.query_vector_dict(vector, query_embeddings=query_embeddings, n_results=3)
+            results = cf.query_vector_dict(vector_dict1, query_embeddings=query_embeddings, n_results=3)
             
             prompt = f"""
             
             Basis the retrieved text chunks and the initial user query, generate a response.
+            
             Query: " {query_text} "
             Top 3 results:
             1 >>>>> {results['documents'][0]}
@@ -132,6 +133,11 @@ elif options == "Chat-bot":
                 1 >>>>> {results['metadata'][0]['start_index']}
                 2 >>>>> {results['metadata'][1]['start_index']}
                 3 >>>>> {results['metadata'][2]['start_index']}
+
+            Mention the Source and Start Index separately, each on a new line, under a section labeled 'Source:'. If the provided context lacks sufficient information to answer the query, respond with:
+            
+            "The context does not provide enough information to answer the query. "
+            
             """
 
             try:
