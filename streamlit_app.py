@@ -51,7 +51,8 @@ elif options == "Document Embedding":
     st.markdown("<p style='font-size: 30px;'>Convert <strong>Text</strong> to <strong>Numerical Representation</strong></p>", unsafe_allow_html=True)
 
     with st.form("document_input"):
-        input_type = st.radio("Choose Input Type", ["Select from Existing Documents", "Upload Markdown File", "Paste Text"])
+        # Use st.sidebar.selectbox instead of st.radio
+        input_type = st.sidebar.selectbox("Choose Input Type", ["Select from Existing Documents", "Upload Markdown File", "Paste Text"])
         documents = []
 
         if input_type == "Select from Existing Documents":
@@ -101,6 +102,7 @@ elif options == "Document Embedding":
                     st.write({"text": chunks[random_index].page_content})
             else:
                 st.warning("Please upload or provide text input.")
+
 
 # Chat-bot Section
 elif options == "Chat-bot":
