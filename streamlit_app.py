@@ -112,7 +112,7 @@ elif options == "Chat-bot":
     
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
 
-    if st.button("Generate Response", key="generate_button", help="Click to initise the RAG model", use_container_width=True):
+    if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
 
         if query_text:
             
