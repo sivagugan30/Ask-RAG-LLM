@@ -36,6 +36,10 @@ if options == "Home":
 
 # Chat-bot Section
 elif options == "Chat-bot":
+    # Sample Questions
+    st.sidebar.write("### Sample Questions:")
+    st.sidebar.write("1. What does Elon Musk see as the biggest misconception about AI's future, and how will it evolve in the next five years?")
+    st.sidebar.write("2. How does Sam Altman view the balance between AI innovation and ethical safeguards in daily life?")
     st.title("Chat-bot")
     
     st.markdown("""
