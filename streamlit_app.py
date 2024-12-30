@@ -103,14 +103,18 @@ elif options == "Document Embedding":
 # Chat-bot Section
 elif options == "Chat-bot":
     st.title("RAG Chatbot")
+    
     st.markdown("### Retrieval-Augmented Generation (RAG)")
-
+    
+    vector_dict = cf.load_json_files(json_files)
+    
     query_text = st.text_input("Enter your query: ", value="What is the name of the island?")
     if st.button("Generate Response"):
         if query_text:
             query_embeddings = cf.generate_query_embeddings(query_text)
-            results = cf.query_vector_dict(json_files, query_embeddings=query_embeddings, n_results=3)
-
+            
+            results = cf.query_vector_dict(vector, query_embeddings=query_embeddings, n_results=3)
+            
             prompt = f"""
             
             Basis the retrieved text chunks and the initial user query, generate a response.
