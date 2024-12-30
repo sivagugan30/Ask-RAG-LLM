@@ -121,7 +121,7 @@ elif options == "Chat-bot":
 elif options == "Instructions":
     st.title("Instructions")
     
-    st.write("1. **RAG**: Understand the concept of RAG technique with a sample prompt.")
+    st.write("1. **Understand RAG**: Understand the concept of RAG technique with a sample prompt.")
     st.write("2. **Chat-bot**: Query the embedded documents and retrieve AI-enhanced answers.")
     st.write("3. **What's Next?**: Explore advanced usage suggestions and future updates.")
     
