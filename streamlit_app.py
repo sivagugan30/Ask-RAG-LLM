@@ -269,3 +269,7 @@ elif options == "What's Next?":
 
 
 
+
+# Footer
+st.sidebar.markdown("---")
+st.sidebar.write("Created by Sivagugan Jayachandran")
