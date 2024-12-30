@@ -25,7 +25,7 @@ json_files = [
 # Sidebar navigation
 st.sidebar.title("Navigation")
 options = st.sidebar.radio("Select a Section", [
-    "Home", "Instructions", "Document Embedding", "Chat-bot", "What's Next?"
+    "Home", "Instructions", "Document Embedding", "RAG", "Chat-bot", "What's Next?"
 ])
 
 # Home Section
@@ -37,7 +37,7 @@ if options == "Home":
 elif options == "Instructions":
     st.title("Instructions")
     
-    st.write("1. **Document Embedding**: Upload or select text for vector database generation.")
+    st.write("1. **RAG**: Understand the concept of RAG technique with a sample prompt.")
     st.write("2. **Chat-bot**: Query the embedded documents and retrieve AI-enhanced answers.")
     st.write("3. **What's Next?**: Explore advanced usage suggestions and future updates.")
     
@@ -45,67 +45,8 @@ elif options == "Instructions":
     st.write("I have tried to make it simple and easy to use. Hope you find the app useful :) ")
 
 
-# Document Embedding Section
-elif options == "Document Embedding":
-    st.title("Document Embedding")
-    st.markdown("<p style='font-size: 30px;'>Convert <strong>Text</strong> to <strong>Numerical Representation</strong></p>", unsafe_allow_html=True)
-
-    with st.form("document_input"):
-        # Use st.sidebar.selectbox instead of st.radio
-        input_type = st.sidebar.selectbox("Choose Input Type", ["Select from Existing Documents", "Upload Markdown File", "Paste Text"])
-        documents = []
-
-        if input_type == "Select from Existing Documents":
-            existing_documents = ["Doc 1", "Doc 2", "Doc 3"]  # Replace with actual documents
-            selected_doc = st.selectbox("Select a Document", existing_documents)
-            documents = [Document(page_content=f"Content of {selected_doc}", metadata={"source": selected_doc})]
-
-        elif input_type == "Upload Markdown File":
-            uploaded_files = st.file_uploader("Upload Markdown Files", type=["md"], accept_multiple_files=True)
-            if uploaded_files:
-                for file in uploaded_files:
-                    content = file.read().decode("utf-8")
-                    metadata_source = file.name
-                    documents.append(Document(page_content=content, metadata={"source": metadata_source}))
-                st.write(f"Uploaded {len(documents)} documents.")
-
-        elif input_type == "Paste Text":
-            pasted_text = st.text_area("Paste your text here (max 500 words)", height=200)
-            if len(pasted_text.split()) > 500:
-                st.warning("Text exceeds 500 words. Please limit your input to 500 words.")
-            elif pasted_text:
-                documents = [Document(page_content=pasted_text, metadata={"source": "Pasted Text"})]
-
-        row_1 = st.columns([2, 1])
-        with row_1[0]:
-            chunk_size = st.number_input("Chunk Size", value=300, min_value=0, step=1, help="Maximum characters in each chunk")
-
-        with row_1[1]:
-            chunk_overlap = st.number_input("Chunk Overlap", value=100, min_value=0, step=1, help="Overlap between chunks")
-
-        row_2 = st.columns([2, 1])
-        with row_2[0]:
-            source_name = st.text_input("New Vector Store Name", "vector_store_1", help="Name for the vector store")
-
-        with row_2[1]:
-            add_start_index = st.selectbox("Add Start Index", [True, False], index=0, help="Include start index in chunks")
-
-        save_button = st.form_submit_button("Generate Vector DB")
-
-        if save_button:
-            if documents:
-                chunks = cf.split_text(documents, chunk_size, chunk_overlap, add_start_index)
-                if chunks:
-                    random_index = random.randint(0, len(chunks) - 1)
-                    st.write(f"Randomly selected chunk (index {random_index}):")
-                    st.write("Metadata:", chunks[random_index].metadata)
-                    st.write({"text": chunks[random_index].page_content})
-            else:
-                st.warning("Please upload or provide text input.")
-
-
 # Chat-bot Section
-elif options == "Chat-bot":
+elif options == "RAG":
     st.title("RAG Chatbot")
     
     st.markdown("### Retrieval-Augmented Generation (RAG)")
