@@ -244,14 +244,14 @@ elif options == "Understand RAG":
                                 Query: " {query_text} "
                                 
                                 Top 3 results:
-                                1 >>>>> {shortened_results['documents'][0]} | Distance: {shortened_results['distances'][0]}
-                                2 >>>>> {shortened_results['documents'][1]} | Distance: {shortened_results['distances'][1]}
-                                3 >>>>> {shortened_results['documents'][2]} | Distance: {shortened_results['distances'][2]}
+                                1 : {shortened_results['documents'][0]} | Distance: {shortened_results['distances'][0]}
+                                2 : {shortened_results['documents'][1]} | Distance: {shortened_results['distances'][1]}
+                                3 : {shortened_results['documents'][2]} | Distance: {shortened_results['distances'][2]}
                                 
-                                Metadata:
-                                1 >>>>> {shortened_results['metadata'][0]}
-                                2 >>>>> {shortened_results['metadata'][1]}
-                                3 >>>>> {shortened_results['metadata'][2]}
+                                Metadata(source):
+                                1 : {shortened_results['metadata'][0]} \n
+                                2 : {shortened_results['metadata'][1]} \n
+                                3 : {shortened_results['metadata'][2]}
                             """
 
                     
