@@ -30,8 +30,8 @@ options = st.sidebar.radio("Select a Section", [
 
 # Home Section
 if options == "Home":
-    st.title("Welcome to the RAG-based Application")
-    st.markdown("""This app allows you to embed documents, query them using RAG, and interact with AI-generated responses.""")
+    st.title("Welcome to the Ask-RAG-LLM Application")
+    st.markdown(""" """)
 
 # Instructions Section
 elif options == "Instructions":
@@ -44,7 +44,7 @@ elif options == "Instructions":
     st.write("")
     st.write("I have tried to make it simple and easy to use. Hope you find the app useful :) ")
 
-    
+
 # Document Embedding Section
 elif options == "Document Embedding":
     st.title("Document Embedding")
@@ -228,3 +228,13 @@ elif options == "What's Next?":
     st.write("- **Advanced Querying:** Enable filtering by metadata or embedding scores.")
     st.write("- **Improved UI/UX:** Design enhancements for a seamless experience.")
     st.write("- **Integration with External APIs:** Add connections to external data sources for richer context.")
+
+
+
+
+
+
+
+
+
+
