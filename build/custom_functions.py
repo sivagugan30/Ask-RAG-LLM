@@ -79,7 +79,7 @@ def load_json_files(json_files):
 def generate_query_embeddings(query_text):
     query_embeddings = OpenAI().embeddings.create(
         input=query_text,
-        model="text-embedding-3-small"  # Specify the embedding model
+        model="text-embedding-3-large"  # Specify the embedding model
     ).data[0].embedding
 
     query_embeddings = np.array(query_embeddings).reshape(1, -1)
