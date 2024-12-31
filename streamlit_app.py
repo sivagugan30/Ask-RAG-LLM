@@ -172,12 +172,7 @@ elif options == "Understand RAG":
                             2 >>>>> {results['documents'][1]}
                             3 >>>>> {results['documents'][2]}
                 
-                            Metadata:
-                            - Source:
-                                1 >>>>> {results['metadata'][0]['source']}
-                                2 >>>>> {results['metadata'][1]['source']}
-                                3 >>>>> {results['metadata'][2]['source']}
-                
+                            Metadata:    
                             - Youtube video details:
                                 1 >>>>> {results['metadata'][0]['video_name'][:20]} | {results['metadata'][0]['video_channel']} | {results['metadata'][0]['speaker']}
                                 2 >>>>> {results['metadata'][1]['video_name'][:20]} | {results['metadata'][1]['video_channel']} | {results['metadata'][1]['speaker']}
