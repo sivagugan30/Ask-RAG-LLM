@@ -36,7 +36,7 @@ if options == "Home":
 
     st.title("Welcome to RAG-based Chatbot!")
     st.write("")
-    st.write("Hello! I’m Siva, and I love creating data products that make a difference.")
+    st.write("Hello! I’m Siva, and I love building data products that make a difference.")
     st.write("")
     st.markdown("\t _'Simplicity is the ultimate sophistication' - Da Vinci_  ")
     st.markdown("\t _'Simple can be harder than complex' - Steve Jobs_")
