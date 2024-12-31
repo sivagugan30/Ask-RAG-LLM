@@ -17,12 +17,12 @@ os.environ["OPENAI_API_KEY"] = st.secrets["KEY"]
 json_files = [
     "tech_1.json",
     "tech_2.json",
-    "tech_3.json"
-    # "tech_4.json",
-    # "tech_5.json",
-    # "tech_6.json",
-    # "tech_7.json",
-    # "tech_8.json"
+    "tech_3.json",
+    "tech_4.json",
+    "tech_5.json",
+    "tech_6.json",
+    "tech_7.json",
+    "tech_8.json"
 ]
 
 # Sidebar navigation
