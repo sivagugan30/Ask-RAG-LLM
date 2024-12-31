@@ -38,7 +38,7 @@ if options == "Home":
     st.write("")
     
     # Add your own statement
-    st.markdown("I've tried to make the app **simple and powerful**. Hope you find it useful :)")
+    st.markdown("I've tried to make the app **simple and easy to use**. Hope you find it useful :)")
     st.write("")
     
     # Optional: You can also add a short introductory message
