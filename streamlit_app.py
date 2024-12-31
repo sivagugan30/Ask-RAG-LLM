@@ -222,7 +222,7 @@ elif options == "Understand RAG":
 
                     short_distances = [round(results["distances"][i], 2) for i in range(3)]
                     short_documents = [
-                        results["documents"][i][:25] + "..." if len(results["documents"][i]) > 25 else results["documents"][i]
+                        results["documents"][i][:35] + "..." if len(results["documents"][i]) > 35 else results["documents"][i]
                         for i in range(3)
                     ]
                     short_metadata = [
