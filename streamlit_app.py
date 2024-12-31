@@ -133,9 +133,9 @@ elif options == "Chatbot":
 elif options == "Instructions":
     st.title("Instructions")
     
-    st.write("1. **Understand RAG**: Understand the concept of RAG technique with a sample prompt.")
-    st.write("2. **Chat-bot**: Query the embedded documents and retrieve AI-enhanced answers.")
-    st.write("3. **What's Next?**: Explore advanced usage suggestions and future updates.")
+    st.write("1. **Understand RAG**: Understand the concept of RAG technique with a sample prompt")
+    st.write("2. **Chat-bot**: Query the embedded documents and retrieve AI-enhanced answers")
+    st.write("3. **What's Next?**: Explore advanced usage suggestions and future updates")
 
 # Chat-bot Section
 elif options == "Understand RAG":
@@ -143,8 +143,8 @@ elif options == "Understand RAG":
     
     st.title("Retrieval-Augmented Generation(RAG)")
 
-    st.write("• _RAG improves answers by first retrieving relevant information from a database, then using a model to generate accurate, context-aware responses._") 
-    st.write("• _RAG is used when the LLM doesn't have enough context on its own._")
+    st.write("• _RAG improves answers by first retrieving relevant information from a database, then using a model to generate accurate, context-aware responses_") 
+    st.write("• _RAG is used when the LLM doesn't have enough context on its own_")
     st.write(" ")
     query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
 
@@ -282,9 +282,9 @@ elif options == "What's Next?":
     st.title("What's Next?")
     
     st.write("Explore advanced features and future updates:")
-    st.write("- **Advanced Querying:** Enable filtering by metadata or embedding scores.")
-    st.write("- **Improved UI/UX:** Design enhancements for a seamless experience.")
-    st.write("- **Integration with External APIs:** Add connections to external data sources for richer context.")
+    st.write("- **Advanced Querying:** Enable filtering by metadata or embedding scores")
+    st.write("- **Improved UI/UX:** Design enhancements for a seamless experience")
+    st.write("- **Integration with External APIs:** Add connections to external data sources for richer context")
 
 
 
