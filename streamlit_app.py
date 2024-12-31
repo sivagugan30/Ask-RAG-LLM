@@ -34,6 +34,25 @@ if options == "Home":
     st.title("Welcome!")
     st.markdown(""" """)
 
+# Home Section
+if options == "Home":
+
+    st.title("Welcome to RAG-based Chatbot!")
+
+    st.markdown("""
+    _"Simplicity is the ultimate sophistication." - Leonardo da Vinci_  
+    _"Simple can be harder than complex." - Steve Jobs_
+    """)
+    st.write("")
+    
+    # Add your own statement
+    st.markdown("I've tried to make it **simple and powerful**.")
+    st.write("")
+    
+    # Optional: You can also add a short introductory message
+    st.markdown("This chatbot uses **Retrieve and Generate (RAG)** architecture for intelligent responses.")
+
+
 # Chat-bot Section
 elif options == "Chatbot":
     # Sample Questions
