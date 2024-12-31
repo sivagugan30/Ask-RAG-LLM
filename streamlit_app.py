@@ -93,16 +93,10 @@ elif options == "Chatbot":
                     2 >>>>> {results['documents'][1]}
                     3 >>>>> {results['documents'][2]}
 
-                    Metadata:
-                    - Source:
-                        1 >>>>> {results['metadata'][0]['source']}
-                        2 >>>>> {results['metadata'][1]['source']}
-                        3 >>>>> {results['metadata'][2]['source']}
-
-                    - Start Index:
-                        1 >>>>> {results['metadata'][0]['start_index']}
-                        2 >>>>> {results['metadata'][1]['start_index']}
-                        3 >>>>> {results['metadata'][2]['start_index']}
+                    Metadata(youtube details):
+                        1 >>>>> {results['metadata']}
+                        2 >>>>> {results['metadata']}
+                        3 >>>>> {results['metadata']}
 
                     If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
         """
@@ -184,10 +178,10 @@ elif options == "Understand RAG":
                                 2 >>>>> {results['metadata'][1]['source']}
                                 3 >>>>> {results['metadata'][2]['source']}
                 
-                            - Start Index:
-                                1 >>>>> {results['metadata'][0]['start_index']}
-                                2 >>>>> {results['metadata'][1]['start_index']}
-                                3 >>>>> {results['metadata'][2]['start_index']}
+                            - Youtube video details:
+                                1 >>>>> {results['metadata'][0]['video_name'][:20]} | {results['metadata'][0]['video_channel']} | {results['metadata'][0]['speaker']}
+                                2 >>>>> {results['metadata'][1]['video_name'][:20]} | {results['metadata'][1]['video_channel']} | {results['metadata'][1]['speaker']}
+                                3 >>>>> {results['metadata'][2]['video_name'][:20]} | {results['metadata'][2]['video_channel']} | {results['metadata'][2]['speaker']}
                 
                             Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
                 
