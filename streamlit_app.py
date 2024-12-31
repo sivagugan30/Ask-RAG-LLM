@@ -270,7 +270,7 @@ elif options == "Understand RAG":
                 
                 
                 with st.expander("3. Generate", expanded=False):
-                    st.write("_Finally, the augmented prompt (user prompt with results) is fed to the LLM to **GENERATE** a response._")
+                    st.write("_Finally, the augmented prompt (user prompt + results) is fed to the LLM to **GENERATE** a response._")
                     st.code(f"Generated response: '{reply.choices[0].message.content}'")
                                     
         else:
