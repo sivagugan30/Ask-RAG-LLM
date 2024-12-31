@@ -226,7 +226,7 @@ elif options == "Understand RAG":
                         for i in range(3)
                     ]
                     short_metadata = [
-                        results["metadata"][i]["source"][:20] + "..." if len(results["metadata"][i]["source"]) > 20 else results["metadata"][i]["source"]
+                        results["metadata"][i]["video_name"][:20] + "..." if len(results["metadata"][i]["video_name"]) > 20 else results["metadata"][i]["video_name"]
                         for i in range(3)
                     ]
                     
