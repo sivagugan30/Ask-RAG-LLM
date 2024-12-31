@@ -32,7 +32,7 @@ options = st.sidebar.radio("Select a Section", [
 if options == "Home":
 
     st.title("Welcome to RAG-based Chatbot!")
-
+    st.write("")
     st.markdown("""
     _"Simplicity is the ultimate sophistication." - Leonardo da Vinci_  
     _"Simple can be harder than complex." - Steve Jobs_
@@ -44,7 +44,7 @@ if options == "Home":
     st.write("")
     
     # Optional: You can also add a short introductory message
-    st.markdown("This chatbot uses **Retrieve and Generate (RAG)** architecture for intelligent responses.")
+    #st.markdown("This chatbot uses **Retrieve and Generate (RAG)** architecture for intelligent responses.")
 
 
 # Chat-bot Section
