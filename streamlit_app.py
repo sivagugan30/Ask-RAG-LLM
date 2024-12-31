@@ -34,13 +34,13 @@ if options == "Home":
     st.title("Welcome to RAG-based Chatbot!")
     st.write("")
     st.markdown("""
-    _"Simplicity is the ultimate sophistication." - Leonardo da Vinci_  
-    _"Simple can be harder than complex." - Steve Jobs_
+    _     'Simplicity is the ultimate sophistication' - Leonardo da Vinci_  
+    _     'Simple can be harder than complex' - Steve Jobs_
     """)
     st.write("")
     
     # Add your own statement
-    st.markdown("I've tried to make it **simple and powerful**.")
+    st.markdown("I've tried to make the app **simple and powerful**. Hope you find it useful :)")
     st.write("")
     
     # Optional: You can also add a short introductory message
