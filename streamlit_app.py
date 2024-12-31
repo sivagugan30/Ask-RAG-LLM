@@ -226,7 +226,12 @@ elif options == "Understand RAG":
                         for i in range(3)
                     ]
                     short_metadata = [
-                        results["metadata"][i]["video_name"][:20] + "..." if len(results["metadata"][i]["video_name"]) > 20 else results["metadata"][i]["video_name"]
+                        f"{results['metadata'][i]['speaker'][:10]} | " +
+                        f"{results['metadata'][i]['video_name'][:10]}... | " +
+                        f"{results['metadata'][i]['video_channel'][:10]}... | " +
+                        f"{results['metadata'][i]['date']} | " +
+                        f"{results['metadata'][i]['video_timestamp']} | " +
+                        f"{results['metadata'][i]['video_url'][:25]}..."
                         for i in range(3)
                     ]
                     
@@ -236,10 +241,10 @@ elif options == "Understand RAG":
                         "documents": short_documents,
                         "metadata": short_metadata
                     }
-    
+                    
                     prompt1 = f"""
-                                Hey LLM, below is the user query and the relevent results. Paraphrase a response.
-    
+                                Hey LLM, below is the user query and the relevant results. Paraphrase a response.
+                    
                                 Query: " {query_text} "
                                 
                                 Top 3 results: \n
@@ -250,10 +255,10 @@ elif options == "Understand RAG":
                                 Metadata(source): \n
                                 \t 1 : {shortened_results['metadata'][0]} \n
                                 \t 2 : {shortened_results['metadata'][1]} \n
-                                \t 3 : {shortened_results['metadata'][2]} 
+                                \t 3 : {shortened_results['metadata'][2]}
                             """
-
                     
+                                        
                     
                     st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
                     
