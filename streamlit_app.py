@@ -276,22 +276,19 @@ elif options == "Understand RAG":
             st.warning("Please enter a query to get results")
 
 
-# What's Next Section
 elif options == "What's Next?":
     st.title("What's Next?")
     
-    st.write("Explore advanced features and future updates:")
-    st.write("- **Advanced Querying:** Enable filtering by metadata or embedding scores")
-    st.write("- **Improved UI/UX:** Design enhancements for a seamless experience")
-    st.write("- **Integration with External APIs:** Add connections to external data sources for richer context")
+    # Model Working
+    st.header("Model Enhancements")
+    st.write("- **Overcoming Limitations:** Baseline models struggle with connecting the dots or drafting coherent summaries. I aim to build on top of this to make the model more efficient.")
+    st.write("- **Graph RAG Integration:** Learn and implement Graph RAG to establish relationships between concepts, enabling contextually rich representations. This improves the model’s ability to understand specific subject domains and terminology.")
 
-
-
-
-
-
-
-
+    # Data Handling
+    st.header("Flexible Data Handling")
+    st.write("- **Document Uploads:** Allow users to upload documents or texts to tailor results to their needs.")
+    st.write("- **YouTube Integration:** Enable users to paste YouTube links, extract video transcripts, and ask questions based on the content.")
+    st.write("- **Custom Context:** Combine user-provided data with the knowledge graph for accurate, context-aware answers.")
 
 
 
