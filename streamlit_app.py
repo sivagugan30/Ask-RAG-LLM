@@ -53,7 +53,7 @@ if options == "Home":
 # Chat-bot Section
 elif options == "Chatbot":
     # Sample Questions
-    st.sidebar.write("### What's Making Waves:")
+    st.sidebar.write("### Trending Now:")
     st.sidebar.write("1. What is Mark Zuckerberg’s take on balancing open-source with global competition?")
     st.sidebar.write("2. How does Sam Altman view the balance between AI innovation and ethical safeguards in daily life?")
     st.sidebar.write("3. What does Jensen Huang think is the next big leap for GPUs in advancing AI?")
