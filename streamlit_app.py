@@ -284,7 +284,7 @@ elif options == "What's Next?":
     st.write("")
     st.write("By integrating Graph RAG, I aim to enhance the model's ability to establish relationships and offer deeper, context-rich insights for complex domains")
     st.write("")
-    st.write("Also, my friends have asked for the option to upload their own documents to help with their academic and research work")
+    st.write("Also, my friends have asked for the option to upload their own documents to help with their academic and research works")
     st.write("")
     st.write("So, the way ahead is to allow users to upload documents or paste YouTube links, so the app can better serve their needs")
 
