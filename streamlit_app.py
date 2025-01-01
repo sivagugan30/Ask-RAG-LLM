@@ -286,7 +286,7 @@ elif options == "What's Next?":
     st.write("")
     st.write("Also, my friends have asked for the option to upload their own documents to help with their academic and research works")
     st.write("")
-    st.write("So, the way ahead is to allow users to upload documents or paste YouTube links, so the app can better serve their needs")
+    st.write("So, the way ahead is to allow users to upload documents or paste YouTube links, so the Graph-RAG based app can better serve their needs")
 
 # Footer
 st.sidebar.markdown("---")
