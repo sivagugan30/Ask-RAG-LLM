@@ -101,7 +101,7 @@ elif options == "Chatbot":
                         2 >>>>> {results['metadata']}
                         3 >>>>> {results['metadata']}
 
-                    If the context does not provide enough information, reply by saying somthing related to this i short : please note that the RAG model currently has embeddings from only 8 YouTube podcasts of tech leaders. As such, with the limited data provided, there may not be specific information related to your query.        """
+                    If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of tech leaders, so there may not be specific information related to your query. Apologies   """
         
         try:
             # Make the request to OpenAI to get the response
