@@ -281,15 +281,13 @@ elif options == "What's Next?":
     
     # Model Working
     st.header("Model Enhancements")
-    st.write("- **Overcoming Limitations:** Baseline models struggle with connecting the dots or drafting coherent summaries. I aim to build on top of this to make the model better")
-    st.write("- **Graph RAG Integration:** Learn and implement Graph RAG to establish relationships between concepts, enabling contextually rich representations. This improves the model’s ability to understand specific subject domains and terminology.")
+    st.write("- **Addressing Gaps:** Improve baseline models by better connecting concepts and drafting coherent summaries.")
+    st.write("- **Graph RAG:** Leverage Graph RAG to establish relationships between concepts, enabling context-rich understanding of specific domains.")
 
     # Data Handling
     st.header("Flexible Data Handling")
-    st.write("- **Document Uploads:** Allow users to upload documents or texts to tailor results to their needs.")
-    st.write("- **YouTube Integration:** Enable users to paste YouTube links, extract video transcripts, and ask questions based on the content.")
-    st.write("- **Custom Context:** Combine user-provided data with the knowledge graph for accurate, context-aware answers.")
-
+    st.write("- **Document Uploads:** Let users upload documents or texts for tailored results.")
+    st.write("- **YouTube Integration:** Allow users to paste YouTube links, extract transcripts, and ask questions about the content.")
 
 
 # Footer
