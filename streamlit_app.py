@@ -281,7 +281,7 @@ elif options == "What's Next?":
     
     # Model Working
     st.header("Model Enhancements")
-    st.write("- **Overcoming Limitations:** Baseline models struggle with connecting the dots or drafting coherent summaries. I aim to build on top of this to make the model more efficient.")
+    st.write("- **Overcoming Limitations:** Baseline models struggle with connecting the dots or drafting coherent summaries. I aim to build on top of this to make the model better")
     st.write("- **Graph RAG Integration:** Learn and implement Graph RAG to establish relationships between concepts, enabling contextually rich representations. This improves the model’s ability to understand specific subject domains and terminology.")
 
     # Data Handling
