@@ -278,7 +278,7 @@ elif options == "Understand RAG":
 
 elif options == "What's Next?":
     st.title("What's Next?")
-    
+    st.write("")
     st.write("While baseline models have their limitations in connecting concepts and summarizing effectively, I’m grateful for the opportunity to build on this")
     st.write("")
     st.write("By integrating Graph RAG, I aim to enhance the model's ability to establish relationships and offer deeper, context-rich insights for complex domains")
