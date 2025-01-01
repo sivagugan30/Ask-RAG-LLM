@@ -279,15 +279,8 @@ elif options == "Understand RAG":
 elif options == "What's Next?":
     st.title("What's Next?")
     
-    # Model Working
-    st.header("Model Enhancements")
-    st.write("- **Addressing Gaps:** Improve baseline models by better connecting concepts and drafting coherent summaries.")
-    st.write("- **Graph RAG:** Leverage Graph RAG to establish relationships between concepts, enabling context-rich understanding of specific domains.")
-
-    # Data Handling
-    st.header("Flexible Data Handling")
-    st.write("- **Document Uploads:** Let users upload documents or texts for tailored results.")
-    st.write("- **YouTube Integration:** Allow users to paste YouTube links, extract transcripts, and ask questions about the content.")
+    st.write("Baseline models struggle to connect concepts and summarize effectively. I want to take this further by integrating Graph RAG, which establishes relationships between ideas and provides deeper, context-rich understanding for complex domains.")
+    st.write("Imagine users uploading documents or pasting YouTube links, and the app instantly extracting insights tailored to their needs. That’s the future I aim to build.")
 
 
 # Footer
