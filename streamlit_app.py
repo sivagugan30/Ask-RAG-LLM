@@ -277,7 +277,7 @@ elif options == "Understand RAG":
 
 
 elif options == "What's Next?":
-    st.title("What's Next?")
+    st.title("The Road Ahead:")
     st.write("")
     st.write("While current baseline RAG model has it's limitations in connecting concepts and summarizing effectively, I’m happy to have learned a new concept")
     st.write("")
