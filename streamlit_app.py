@@ -134,7 +134,7 @@ elif options == "Instructions":
     
     st.write("1. **Understand RAG**: Learn how RAG works with a simple example")
     st.write("2. **Chat-bot**: Ask questions and get answers based on YouTube podcasts of tech leaders")
-    st.write("3. **What's Next?**: See how the app will improve and add more value in the future")
+    st.write("3. **What's Next?**: Explore how the app will improve and offer more features in the future")
 
 # Chat-bot Section
 elif options == "Understand RAG":
