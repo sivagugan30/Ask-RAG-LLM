@@ -101,8 +101,7 @@ elif options == "Chatbot":
                         2 >>>>> {results['metadata']}
                         3 >>>>> {results['metadata']}
 
-                    If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
-        """
+                    If the context does not provide enough information, reply by saying somthing related to this i short : please note that the RAG model currently has embeddings from only 8 YouTube podcasts of tech leaders. As such, with the limited data provided, there may not be specific information related to your query.        """
         
         try:
             # Make the request to OpenAI to get the response
