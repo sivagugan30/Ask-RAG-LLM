@@ -49,7 +49,7 @@ if options == "Home":
     st.write("")
     
 
-    st.write("**Next Page** : Use the Navigation bar in the top left to proceed.")
+    st.write("**Next Page** : Use the Navigation bar in the top left to start")
 
 
 
