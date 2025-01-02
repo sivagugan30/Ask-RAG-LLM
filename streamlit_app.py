@@ -95,15 +95,15 @@ elif options == "Chatbot":
                     Query: " {user_input} "
 
                     Top 3 results:
-                    1 >>>>> {results['documents'][0]}
-                    2 >>>>> {results['documents'][1]}
-                    3 >>>>> {results['documents'][2]}
+                    1 - {results['documents'][0]}
+                    2 - {results['documents'][1]}
+                    3 - {results['documents'][2]}
 
                     Metadata(youtube details):
-                        1 >>>>> {results['metadata']}
-                        2 >>>>> {results['metadata']}
-                        3 >>>>> {results['metadata']}
-
+                        1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']}
+                        2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']}
+                        3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']}
+                        
                     If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies   """
         
         try:
