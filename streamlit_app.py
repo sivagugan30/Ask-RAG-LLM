@@ -104,7 +104,7 @@ elif options == "Chatbot":
                         2 >>>>> {results['metadata']}
                         3 >>>>> {results['metadata']}
 
-                    If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of tech leaders, so there may not be specific information related to your query. Apologies   """
+                    If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies   """
         
         try:
             # Make the request to OpenAI to get the response
@@ -136,7 +136,7 @@ elif options == "Instructions":
     st.title("Instructions")
     
     st.write("1. **Understand RAG**: Learn how RAG works with a simple example")
-    st.write("2. **Chat-bot**: Ask questions and get answers based on YouTube podcasts of tech leaders")
+    st.write("2. **Chat-bot**: Ask questions and get answers based on YouTube podcasts of Tech leaders")
     st.write("3. **What's Next?**: Explore how the app will improve and offer more features in the future")
 
 # Chat-bot Section
