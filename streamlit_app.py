@@ -75,7 +75,7 @@ elif options == "Chatbot":
         st.session_state.messages = []
 
     # User input for the query
-    user_input = st.chat_input("Ask me anything about the documents:")
+    user_input = st.chat_input("Ask me anything about the trending tech topics:")
 
     if user_input:
         # Add the user input to the conversation history
@@ -99,12 +99,15 @@ elif options == "Chatbot":
                     2 - {results['documents'][1]}
                     3 - {results['documents'][2]}
 
-                    Metadata(youtube details):
-                        1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']}
-                        2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']}
-                        3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']}
+                   Metadata(youtube details):
+                            1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']} | youtube video name : {results['metadata'][0]['video_name']}
+                            2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']} | youtube video name : {results['metadata'][1]['video_name']}
+                            3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']} | youtube video name : {results['metadata'][2]['video_name']}
                         
-                    If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies   """
+                   Provide a structured response, including 'sources' with only the YouTube video title and link. Please present the link as a hyperlinked text with the YouTube video title on a new line.
+
+                   If the context does not provide enough information, reply by saying : 'Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies'  
+                """
         
         try:
             # Make the request to OpenAI to get the response
@@ -178,17 +181,13 @@ elif options == "Understand RAG":
                             3 >>>>> {results['documents'][2]}
                 
                             Metadata(youtube details):
-                            1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']}
-                            2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']}
-                            3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']}
+                            1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']} | youtube video name : {results['metadata'][0]['video_name']}
+                            2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']} | youtube video name : {results['metadata'][1]['video_name']}
+                            3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']} | youtube video name : {results['metadata'][2]['video_name']}
                         
-                    'If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies'  
-                
-                            Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
-                            
-                            Provide a concise answer within 50 words, including 'sources' (list only the YouTube video title and link on a new line).
-                            
-                            If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
+                            Provide a concise answer within 50 words, including 'sources' (list only the YouTube video title and link ( add a hyper link with the youtube name)  on a new line).
+
+                            'If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies'  
                 """
                 
                 # Make the request to OpenAI to get the response
@@ -264,6 +263,8 @@ elif options == "Understand RAG":
                                 \t 1 : {shortened_results['metadata'][0]} \n
                                 \t 2 : {shortened_results['metadata'][1]} \n
                                 \t 3 : {shortened_results['metadata'][2]}
+
+                                
                             """
                     
                                         
