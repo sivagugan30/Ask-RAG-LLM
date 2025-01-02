@@ -186,7 +186,7 @@ elif options == "Understand RAG":
                 
                             Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
                             
-                            Provide a super short answer only with 'sources' defined in a new line.
+                            Provide a concise answer within 50 words, including 'sources' (list only the YouTube video title and link on a new line).
                             
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                 """
