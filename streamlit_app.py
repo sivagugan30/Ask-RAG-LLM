@@ -50,7 +50,7 @@ if options == "Home":
     
 
     st.write("**Next Page** : Use the Navigation bar in the top left corner to start")
-
+    st.write('**Last update** : Dec 31, 2024')
 
 
 # Chat-bot Section
