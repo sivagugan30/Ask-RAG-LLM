@@ -75,7 +75,7 @@ elif options == "Chatbot":
         st.session_state.messages = []
 
     # User input for the query
-    user_input = st.chat_input("Ask me anything about the trending tech topics:")
+    user_input = st.chat_input("Ask me anything about the buzzing tech topics:")
 
     if user_input:
         # Add the user input to the conversation history
