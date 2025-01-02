@@ -28,7 +28,7 @@ json_files = [
 # Sidebar navigation
 st.sidebar.title("Navigation")
 options = st.sidebar.radio("Select a Section", [
-    "Home", "Instructions", "Understand RAG", "Chatbot", "What's Next?"
+    "Home", "Instructions", "How RAG works?", "Chatbot", "What's Next?"
 ])
 
 # Home Section
@@ -137,12 +137,12 @@ elif options == "Chatbot":
 elif options == "Instructions":
     st.title("Instructions")
     
-    st.write("1. **Understand RAG**: Learn how RAG works with a simple example")
+    st.write("1. **How RAG works?**: Learn how RAG works with a simple example")
     st.write("2. **Chat-bot**: Ask questions and get answers based on YouTube podcasts of Tech leaders")
     st.write("3. **What's Next?**: Explore how the app will improve and offer more features in the future")
 
 # Chat-bot Section
-elif options == "Understand RAG":
+elif options == "How RAG works?":
     #st.title("RAG Chatbot")
     
     st.title("Retrieval-Augmented Generation(RAG)")
@@ -213,6 +213,16 @@ elif options == "Understand RAG":
                 with st.expander("1. Retrieve", expanded=False):
     
                     st.write("_First, Cosine Similarity is applied to the user prompt's embeddings and the vector database to **RETRIEVE** the most relevant results._")
+
+                    st.write("""
+                                **'distances'**: Cosine similarity score (0-1), where 1 means a perfect match. Higher values indicate more relevance.
+                                
+                                **'documents'**: The relevant text content from the documents.
+                                
+                                **'metadata'**: Extra details about the documents, such as their source.
+                            """)
+
+
                     
                     results1 = {
                                 "distances" : results["distances"],
