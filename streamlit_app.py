@@ -215,11 +215,11 @@ elif options == "How RAG works?":
                     st.write("_First, Cosine Similarity is applied to the embeddings of user prompt and the external database to **RETRIEVE** the top 3 relevant results._")
 
                     st.code("""
-                        'distances': Cosine similarity score (0-1), where 1 means a perfect match. Higher values indicate more relevance
+                        distances = Cosine similarity score (0-1), where 1 means a perfect match. Higher values indicate more relevance
                         
-                        'documents': The relevant text content from the external database
+                        documents = The relevant text content from the external database
                         
-                        'metadata': Extra details about the documents, such as their source
+                        metadata = Extra details about the documents, such as their source
                     """, language="markdown")
 
 
