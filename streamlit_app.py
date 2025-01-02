@@ -148,7 +148,7 @@ elif options == "Understand RAG":
     st.write("• _RAG improves answers by first retrieving relevant information from an external database, then using LLM to generate accurate, context-aware responses._")
  
     st.write(" ")
-    query_text = st.text_input("User Prompt: ", value="How does Satya Nadella differentiate AI agents from traditional software or automation tools?")
+    query_text = st.text_input("User Prompt: ", value="How does Satya Nadella view the impact of Agent AI?")
 
     if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
 
