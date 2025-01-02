@@ -182,7 +182,9 @@ elif options == "Understand RAG":
                                 3 >>>>> {results['metadata'][2]['video_name'][:20]} | {results['metadata'][2]['video_channel']} | {results['metadata'][2]['speaker']}
                 
                             Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
-                
+                            
+                            Provide a short answer only with 'sources' defined in a new line.
+                            
                             If the context does not provide enough information, respond with "The context does not provide enough information to answer the query."
                 """
                 
