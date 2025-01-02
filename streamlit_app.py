@@ -129,8 +129,7 @@ elif options == "Chatbot":
             st.chat_message("user").markdown(message['content'])
         else:
             st.chat_message("assistant").markdown(message['content'])
-
-    
+            
 # Instructions Section
 elif options == "Instructions":
     st.title("Instructions")
@@ -178,11 +177,12 @@ elif options == "Understand RAG":
                             2 >>>>> {results['documents'][1]}
                             3 >>>>> {results['documents'][2]}
                 
-                            Metadata:    
-                            - Youtube video details:
-                                1 >>>>> {results['metadata'][0]['video_name'][:20]} | {results['metadata'][0]['video_channel']} | {results['metadata'][0]['speaker']}
-                                2 >>>>> {results['metadata'][1]['video_name'][:20]} | {results['metadata'][1]['video_channel']} | {results['metadata'][1]['speaker']}
-                                3 >>>>> {results['metadata'][2]['video_name'][:20]} | {results['metadata'][2]['video_channel']} | {results['metadata'][2]['speaker']}
+                            Metadata(youtube details):
+                            1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']}
+                            2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']}
+                            3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']}
+                        
+                    'If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies'  
                 
                             Mention the Source and Start Index as well seperately in a two new line under 'Source:'. The answer should be structured and simple. 
                             
