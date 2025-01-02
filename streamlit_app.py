@@ -45,13 +45,13 @@ if options == "Home":
     # Add your own statement
     st.markdown("I've tried to make the app **simple and easy to use**. Hope you find it useful :)")
     st.write("")
-    
-    # Optional: You can also add a short introductory message
-    #st.markdown("This chatbot uses **Retrieve and Generate (RAG)** architecture for intelligent responses.")
+
+    if st.button("Next page : Intructions"):
+        st.session_state.page = "Instructions"
 
 
 # Chat-bot Section
-elif options == "Chatbot":
+elif options == "Chatbot" or st.session_state.get("page") == "Chatbot":
     # Sample Questions
     st.sidebar.write("### Trending Now:")
     st.sidebar.write("1. What is Mark Zuckerberg’s take on balancing open-source with global competition?")
@@ -64,8 +64,6 @@ elif options == "Chatbot":
             Ask questions on Tech leaders' opinions extracted from podcasts and receive answers generated using RAG with LLM
             
             """)
-
-
 
     # Initialize session state for conversation history
     if 'messages' not in st.session_state:
@@ -127,17 +125,20 @@ elif options == "Chatbot":
         else:
             st.chat_message("assistant").markdown(message['content'])
 
-    
-# Instructions Section
-elif options == "Instructions":
+    if st.button("Next page : What's Next?"):
+        st.session_state.page = "What's Next?"
+
+elif options == "Instructions" or st.session_state.get("page") == "Instructions":
     st.title("Instructions")
     
     st.write("1. **Understand RAG**: Learn how RAG works with a simple example")
     st.write("2. **Chat-bot**: Ask questions and get answers based on YouTube podcasts of tech leaders")
     st.write("3. **What's Next?**: Explore how the app will improve and offer more features in the future")
 
-# Chat-bot Section
-elif options == "Understand RAG":
+    if st.button("Next page : Understand RAG"):
+        st.session_state.page = "Understand RAG"
+        
+elif options == "Understand RAG" or st.session_state.get("page") == "Understand RAG":
     #st.title("RAG Chatbot")
     
     st.title("Retrieval-Augmented Generation(RAG)")
@@ -277,6 +278,9 @@ elif options == "Understand RAG":
                                     
         else:
             st.warning("Please enter a query to get results")
+
+    if st.button("Next page : Chatbot"):
+        st.session_state.page = "Chatbot"
 
 
 elif options == "What's Next?":
