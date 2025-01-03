@@ -296,9 +296,7 @@ elif options == "What's Next?":
     st.write("")
     st.write("By integrating Graph RAG, I aim to enhance the model's ability to establish relationships and offer deeper, context-rich insights for complex domains.")
     st.write("")
-    st.write("Additionally, my friends have requested the option to upload their own documents for academic and research purposes.")
-    st.write("")
-    st.write("The next step is to allow users to upload documents or paste YouTube links, enabling the Graph-RAG-based app to better meet their needs.")
+    st.write("Upon requests from my friends, I plan to enable the option to upload documents or paste YouTube links for academic and research purposes, allowing the Graph-RAG-based app to better meet everyone' needs.")
     st.write("")
     st.write("Ultimately, my goal is to build an **AI agent** that assists users by processing diverse inputs and providing tailored, context-driven insights.")
 # Footer
