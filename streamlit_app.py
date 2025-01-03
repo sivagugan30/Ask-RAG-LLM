@@ -292,14 +292,15 @@ elif options == "How RAG works?":
 elif options == "What's Next?":
     st.title("The Road Ahead:")
     st.write("")
-    st.write("While current baseline RAG model has it's limitations in connecting concepts and summarizing effectively, I’m happy to have learned a new concept")
+    st.write("While the current baseline RAG model has limitations in connecting concepts and summarizing effectively, I’m excited to have learned a new concept.")
     st.write("")
-    st.write("By integrating Graph RAG, I aim to enhance the model's ability to establish relationships and offer deeper, context-rich insights for complex domains")
+    st.write("By integrating Graph RAG, I aim to enhance the model's ability to establish relationships and offer deeper, context-rich insights for complex domains.")
     st.write("")
-    st.write("Also, my friends have asked for the option to upload their own documents to help with their academic and research works")
+    st.write("Additionally, my friends have requested the option to upload their own documents for academic and research purposes.")
     st.write("")
-    st.write("Hence, the way forward is to allow users to upload documents or paste YouTube links, enabling the Graph-RAG-based app to better serve their needs.")
-
+    st.write("The next step is to allow users to upload documents or paste YouTube links, enabling the Graph-RAG-based app to better meet their needs.")
+    st.write("")
+    st.write("Ultimately, my goal is to build an **AI agent** that assists users by processing diverse inputs and providing tailored, context-driven insights.")
 # Footer
 st.sidebar.markdown("---")
 st.sidebar.write("Created by Sivagugan Jayachandran")
