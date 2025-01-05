@@ -112,7 +112,7 @@ elif options == "Chatbot":
         try:
             # Make the request to OpenAI to get the response
             reply = OpenAI().chat.completions.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "developer", "content": "You are a helpful assistant"},
                     {"role": "user", "content": prompt}
@@ -193,7 +193,7 @@ elif options == "How RAG works?":
                 # Make the request to OpenAI to get the response
                 try:
                     reply = OpenAI().chat.completions.create(
-                        model="gpt-4",  # Fixed model name typo from "gpt-4o" to "gpt-4"
+                        model="gpt-3.5-turbo",  # Fixed model name typo from "gpt-3.5-turboo" to "gpt-3.5-turbo"
                         messages=[
                             {"role": "developer", "content": "You are a helpful assistant"},
                             {"role": "user", "content": prompt}
