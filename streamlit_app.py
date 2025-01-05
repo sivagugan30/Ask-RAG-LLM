@@ -185,7 +185,7 @@ elif options == "How RAG works?":
                             2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']} | youtube video name : {results['metadata'][1]['video_name']}
                             3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']} | youtube video name : {results['metadata'][2]['video_name']}
                         
-                            Provide a concise answer within 50 words, including 'sources' (list only the YouTube video title and link ( add a hyper link with the youtube name)  on a new line).
+                            Provide a concise answer within 100 words, including 'sources' (list only the YouTube video title and link ( add a hyper link with the youtube name)  on a new line).
 
                             'If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies'  
                 """
