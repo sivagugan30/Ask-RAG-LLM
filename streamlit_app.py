@@ -6,8 +6,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import json
 import os
 from openai import OpenAI
-from langchain.schema import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 import build.custom_functions as cf
 import base64
 # Set up API Key

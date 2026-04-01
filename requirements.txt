@@ -2,4 +2,5 @@ openai
 streamlit
 scikit-learn
 numpy
-langchain
+langchain-core
+langchain-text-splitters
