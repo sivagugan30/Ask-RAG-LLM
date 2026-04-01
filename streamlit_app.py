@@ -153,99 +153,101 @@ elif options == "How RAG works?":
     query_text = "How does Satya Nadella view the impact of Agent AI?"
     st.text_input("User Prompt: ", value=query_text, disabled=True)
 
-    # --- Frozen demo data (pre-computed, no API calls) ---
-    results = {
-        "distances": [0.6372312578428785, 0.6299721035234419, 0.6196395966320398],
-        "documents": [
-            "[Satya Nadella] : 'there will be disruption but so the way we are approaching at least our M365 stuff is one is build co-pilot as that organizing layer UI for AI get all AG agents including our own agents you can say the Excel is an agent to my co-pilot word is an agent it's kind of specialized canvases which is I'm doing a legal document let me take it into pages and then to word and then have the co-pilot Go With It uh go into Excel and have the co-pilot go with it and so that's sort of a new way to think about'",
-            "[Satya Nadella] : 'cloud um and I think in a world where every AI application is a stateful application it's an agentic application that agent agent performs actions then classic app server plus the AI app server plus the data base are all required and so I go back to my fundamental thing which is hey we built this 60 plus AI regions I mean Azure regions they all will be ready for fullon AI applications and that's I think what will be needed that makes it you know that makes a lot of sense um so let's talk a little bit you know we've'",
-            "[Satya Nadella] : 'try and collapse it all right whether it's in customer service whether it is in you know uh by the way the other fascinating thing that's increasing is just not CRM but even our what we call finance and operations uh because people want more AI native Biz apps right that means The Biz app the logic tier can be orchestrated by Ai and AI agent so in other words copilot to agent to my business application should be very seamless now in the same way you could even say hey why do I need Excel like interestingly enough one of the most'",
-        ],
-        "metadata": [
-            {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "00:49:46", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
-            {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "01:12:09", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
-            {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "00:47:58", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
-        ],
-    }
+    if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
 
-    reply_text = (
-        "Satya Nadella views the impact of Agent AI as a transformative tool for enhancing "
-        "productivity and seamless integration with various applications like Excel and Word. "
-        "He emphasizes the importance of AI-native business applications and the orchestration "
-        "of logic tiers through AI agents. The vision is to enable a smooth transition from "
-        "co-pilot to agent to business applications.\n\n"
-        "Sources:\n"
-        "- [Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner]"
-        "(https://www.youtube.com/watch?v=9NtsnzRFJ_o)"
-    )
-
-    st.success(reply_text)
-
-    st.markdown("###  RAG = Retrieve + Augment + Generate ")
-
-    with st.expander("1. Retrieve", expanded=False):
-
-        st.write("_First, Cosine Similarity is applied to the embeddings of user prompt and the external database to **RETRIEVE** the top 3 relevant results._")
-
-        st.code(" 'distances' : Cosine similarity score [0 to 1], where 1 means a perfect match. Higher values indicate more relevance")
-        st.code(" 'documents' : Relevant text content from the external database")
-        st.code(" 'metadata' : Extra details about the documents, such as their source")
-
-        st.write('Retrived results : ')
-
-        st.write({
-            "distances": results["distances"],
-            "documents": results["documents"],
-            "metadata": results["metadata"],
-        })
-
-    with st.expander("2. Augment", expanded=False):
-
-        short_distances = [round(results["distances"][i], 2) for i in range(3)]
-        short_documents = [
-            results["documents"][i][:35] + "..." if len(results["documents"][i]) > 35 else results["documents"][i]
-            for i in range(3)
-        ]
-        short_metadata = [
-            f"{results['metadata'][i]['speaker'][:10]} | " +
-            f"{results['metadata'][i]['video_name'][:10]}... | " +
-            f"{results['metadata'][i]['video_channel'][:10]}... | " +
-            f"{results['metadata'][i]['date']} | " +
-            f"{results['metadata'][i]['video_timestamp']} | " +
-            f"{results['metadata'][i]['video_url'][:25]}..."
-            for i in range(3)
-        ]
-
-        shortened_results = {
-            "distances": short_distances,
-            "documents": short_documents,
-            "metadata": short_metadata
+        # --- Frozen demo data (pre-computed, no API calls) ---
+        results = {
+            "distances": [0.6372312578428785, 0.6299721035234419, 0.6196395966320398],
+            "documents": [
+                "[Satya Nadella] : 'there will be disruption but so the way we are approaching at least our M365 stuff is one is build co-pilot as that organizing layer UI for AI get all AG agents including our own agents you can say the Excel is an agent to my co-pilot word is an agent it's kind of specialized canvases which is I'm doing a legal document let me take it into pages and then to word and then have the co-pilot Go With It uh go into Excel and have the co-pilot go with it and so that's sort of a new way to think about'",
+                "[Satya Nadella] : 'cloud um and I think in a world where every AI application is a stateful application it's an agentic application that agent agent performs actions then classic app server plus the AI app server plus the data base are all required and so I go back to my fundamental thing which is hey we built this 60 plus AI regions I mean Azure regions they all will be ready for fullon AI applications and that's I think what will be needed that makes it you know that makes a lot of sense um so let's talk a little bit you know we've'",
+                "[Satya Nadella] : 'try and collapse it all right whether it's in customer service whether it is in you know uh by the way the other fascinating thing that's increasing is just not CRM but even our what we call finance and operations uh because people want more AI native Biz apps right that means The Biz app the logic tier can be orchestrated by Ai and AI agent so in other words copilot to agent to my business application should be very seamless now in the same way you could even say hey why do I need Excel like interestingly enough one of the most'",
+            ],
+            "metadata": [
+                {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "00:49:46", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
+                {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "01:12:09", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
+                {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "00:47:58", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
+            ],
         }
 
-        prompt1 = f"""
-                    Hey LLM, below is the user query and the relevant results. Paraphrase a response.
+        reply_text = (
+            "Satya Nadella views the impact of Agent AI as a transformative tool for enhancing "
+            "productivity and seamless integration with various applications like Excel and Word. "
+            "He emphasizes the importance of AI-native business applications and the orchestration "
+            "of logic tiers through AI agents. The vision is to enable a smooth transition from "
+            "co-pilot to agent to business applications.\n\n"
+            "Sources:\n"
+            "- [Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner]"
+            "(https://www.youtube.com/watch?v=9NtsnzRFJ_o)"
+        )
 
-                    Query: " {query_text} "
+        st.success(reply_text)
 
-                    Top 3 results: \n
-                    \t 1 : {shortened_results['documents'][0]} | d = {shortened_results['distances'][0]} \n
-                    \t 2 : {shortened_results['documents'][1]} | d = {shortened_results['distances'][1]} \n
-                    \t 3 : {shortened_results['documents'][2]} | d = {shortened_results['distances'][2]} \n
+        st.markdown("###  RAG = Retrieve + Augment + Generate ")
 
-                    Metadata(source): \n
-                    \t 1 : {shortened_results['metadata'][0]} \n
-                    \t 2 : {shortened_results['metadata'][1]} \n
-                    \t 3 : {shortened_results['metadata'][2]}
-                """
+        with st.expander("1. Retrieve", expanded=False):
 
-        st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
+            st.write("_First, Cosine Similarity is applied to the embeddings of user prompt and the external database to **RETRIEVE** the top 3 relevant results._")
 
-        st.code('Augmented Prompt (redacted version): ')
-        st.info(prompt1)
+            st.code(" 'distances' : Cosine similarity score [0 to 1], where 1 means a perfect match. Higher values indicate more relevance")
+            st.code(" 'documents' : Relevant text content from the external database")
+            st.code(" 'metadata' : Extra details about the documents, such as their source")
 
-    with st.expander("3. Generate", expanded=False):
-        st.write("_Finally, the augmented prompt (user prompt + results) is fed to the LLM to **GENERATE** a response._")
-        st.code(f"Generated response: '{reply_text}'")
+            st.write('Retrived results : ')
+
+            st.write({
+                "distances": results["distances"],
+                "documents": results["documents"],
+                "metadata": results["metadata"],
+            })
+
+        with st.expander("2. Augment", expanded=False):
+
+            short_distances = [round(results["distances"][i], 2) for i in range(3)]
+            short_documents = [
+                results["documents"][i][:35] + "..." if len(results["documents"][i]) > 35 else results["documents"][i]
+                for i in range(3)
+            ]
+            short_metadata = [
+                f"{results['metadata'][i]['speaker'][:10]} | " +
+                f"{results['metadata'][i]['video_name'][:10]}... | " +
+                f"{results['metadata'][i]['video_channel'][:10]}... | " +
+                f"{results['metadata'][i]['date']} | " +
+                f"{results['metadata'][i]['video_timestamp']} | " +
+                f"{results['metadata'][i]['video_url'][:25]}..."
+                for i in range(3)
+            ]
+
+            shortened_results = {
+                "distances": short_distances,
+                "documents": short_documents,
+                "metadata": short_metadata
+            }
+
+            prompt1 = f"""
+                        Hey LLM, below is the user query and the relevant results. Paraphrase a response.
+
+                        Query: " {query_text} "
+
+                        Top 3 results: \n
+                        \t 1 : {shortened_results['documents'][0]} | d = {shortened_results['distances'][0]} \n
+                        \t 2 : {shortened_results['documents'][1]} | d = {shortened_results['distances'][1]} \n
+                        \t 3 : {shortened_results['documents'][2]} | d = {shortened_results['distances'][2]} \n
+
+                        Metadata(source): \n
+                        \t 1 : {shortened_results['metadata'][0]} \n
+                        \t 2 : {shortened_results['metadata'][1]} \n
+                        \t 3 : {shortened_results['metadata'][2]}
+                    """
+
+            st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
+
+            st.code('Augmented Prompt (redacted version): ')
+            st.info(prompt1)
+
+        with st.expander("3. Generate", expanded=False):
+            st.write("_Finally, the augmented prompt (user prompt + results) is fed to the LLM to **GENERATE** a response._")
+            st.code(f"Generated response: '{reply_text}'")
 
 
 elif options == "What's Next?":
