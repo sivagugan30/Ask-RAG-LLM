@@ -143,150 +143,109 @@ elif options == "Instructions":
 
 # Chat-bot Section
 elif options == "How RAG works?":
-    #st.title("RAG Chatbot")
-    
+
     st.title("Retrieval-Augmented Generation(RAG)")
 
     st.write("• _RAG is used when LLMs (Large Language Models) lack detailed knowledge about a specific topic or domain._")
     st.write("• _RAG improves answers by first retrieving relevant information from an external database, then using LLM to generate accurate, context-aware responses._")
- 
+
     st.write(" ")
-    query_text = st.text_input("User Prompt: ", value="How does Satya Nadella view the impact of Agent AI?")
+    query_text = "How does Satya Nadella view the impact of Agent AI?"
+    st.text_input("User Prompt: ", value=query_text, disabled=True)
 
-    if st.button("Generate Response", key="generate_button", help="Click to initialise the RAG model", use_container_width=True):
+    # --- Frozen demo data (pre-computed, no API calls) ---
+    results = {
+        "distances": [0.6372312578428785, 0.6299721035234419, 0.6196395966320398],
+        "documents": [
+            "[Satya Nadella] : 'there will be disruption but so the way we are approaching at least our M365 stuff is one is build co-pilot as that organizing layer UI for AI get all AG agents including our own agents you can say the Excel is an agent to my co-pilot word is an agent it's kind of specialized canvases which is I'm doing a legal document let me take it into pages and then to word and then have the co-pilot Go With It uh go into Excel and have the co-pilot go with it and so that's sort of a new way to think about'",
+            "[Satya Nadella] : 'cloud um and I think in a world where every AI application is a stateful application it's an agentic application that agent agent performs actions then classic app server plus the AI app server plus the data base are all required and so I go back to my fundamental thing which is hey we built this 60 plus AI regions I mean Azure regions they all will be ready for fullon AI applications and that's I think what will be needed that makes it you know that makes a lot of sense um so let's talk a little bit you know we've'",
+            "[Satya Nadella] : 'try and collapse it all right whether it's in customer service whether it is in you know uh by the way the other fascinating thing that's increasing is just not CRM but even our what we call finance and operations uh because people want more AI native Biz apps right that means The Biz app the logic tier can be orchestrated by Ai and AI agent so in other words copilot to agent to my business application should be very seamless now in the same way you could even say hey why do I need Excel like interestingly enough one of the most'",
+        ],
+        "metadata": [
+            {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "00:49:46", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
+            {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "01:12:09", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
+            {"speaker": "Satya Nadella", "video_name": "Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner", "video_channel": "Bg2 Pod", "date": "12 Dec 2024", "video_timestamp": "00:47:58", "video_url": "https://www.youtube.com/watch?v=9NtsnzRFJ_o"},
+        ],
+    }
 
-        if query_text:
-            
-                vector_dict1 = cf.load_json_files(json_files)
-                
-                # Generate embeddings for the query text
-                query_embeddings = cf.generate_query_embeddings(query_text)
-                
-                # Retrieve the top 3 results using the query embeddings
-                results = cf.query_vector_dict(
-                    vector_dict1, 
-                    query_embeddings=query_embeddings,
-                    n_results=3
-                )
-                
-                # Construct the prompt for the LLM
-                prompt = f"""
-                            Basis the retrieved text chunks and the initial user query, generate a response.
-                
-                            Query: " {query_text} "
-                
-                            Top 3 results:
-                            1 >>>>> {results['documents'][0]}
-                            2 >>>>> {results['documents'][1]}
-                            3 >>>>> {results['documents'][2]}
-                
-                            Metadata(youtube details):
-                            1 - youtube channel : {results['metadata'][0]['video_channel']} | youtube link : {results['metadata'][0]['video_url']} | youtube video name : {results['metadata'][0]['video_name']}
-                            2 - youtube channel : {results['metadata'][1]['video_channel']} | youtube link : {results['metadata'][1]['video_url']} | youtube video name : {results['metadata'][1]['video_name']}
-                            3 - youtube channel : {results['metadata'][2]['video_channel']} | youtube link : {results['metadata'][2]['video_url']} | youtube video name : {results['metadata'][2]['video_name']}
-                        
-                            Provide a concise answer within 100 words, including 'sources' (list only the YouTube video title and link ( add a hyper link with the youtube name)  on a new line).
+    reply_text = (
+        "Satya Nadella views the impact of Agent AI as a transformative tool for enhancing "
+        "productivity and seamless integration with various applications like Excel and Word. "
+        "He emphasizes the importance of AI-native business applications and the orchestration "
+        "of logic tiers through AI agents. The vision is to enable a smooth transition from "
+        "co-pilot to agent to business applications.\n\n"
+        "Sources:\n"
+        "- [Satya Nadella | BG2 w/ Bill Gurley & Brad Gerstner]"
+        "(https://www.youtube.com/watch?v=9NtsnzRFJ_o)"
+    )
 
-                            'If the context does not provide enough information, reply by saying : Please note that the current sources available to RAG are limited to 8 YouTube podcasts of Tech leaders, so there may not be specific information related to your query. Apologies'  
+    st.success(reply_text)
+
+    st.markdown("###  RAG = Retrieve + Augment + Generate ")
+
+    with st.expander("1. Retrieve", expanded=False):
+
+        st.write("_First, Cosine Similarity is applied to the embeddings of user prompt and the external database to **RETRIEVE** the top 3 relevant results._")
+
+        st.code(" 'distances' : Cosine similarity score [0 to 1], where 1 means a perfect match. Higher values indicate more relevance")
+        st.code(" 'documents' : Relevant text content from the external database")
+        st.code(" 'metadata' : Extra details about the documents, such as their source")
+
+        st.write('Retrived results : ')
+
+        st.write({
+            "distances": results["distances"],
+            "documents": results["documents"],
+            "metadata": results["metadata"],
+        })
+
+    with st.expander("2. Augment", expanded=False):
+
+        short_distances = [round(results["distances"][i], 2) for i in range(3)]
+        short_documents = [
+            results["documents"][i][:35] + "..." if len(results["documents"][i]) > 35 else results["documents"][i]
+            for i in range(3)
+        ]
+        short_metadata = [
+            f"{results['metadata'][i]['speaker'][:10]} | " +
+            f"{results['metadata'][i]['video_name'][:10]}... | " +
+            f"{results['metadata'][i]['video_channel'][:10]}... | " +
+            f"{results['metadata'][i]['date']} | " +
+            f"{results['metadata'][i]['video_timestamp']} | " +
+            f"{results['metadata'][i]['video_url'][:25]}..."
+            for i in range(3)
+        ]
+
+        shortened_results = {
+            "distances": short_distances,
+            "documents": short_documents,
+            "metadata": short_metadata
+        }
+
+        prompt1 = f"""
+                    Hey LLM, below is the user query and the relevant results. Paraphrase a response.
+
+                    Query: " {query_text} "
+
+                    Top 3 results: \n
+                    \t 1 : {shortened_results['documents'][0]} | d = {shortened_results['distances'][0]} \n
+                    \t 2 : {shortened_results['documents'][1]} | d = {shortened_results['distances'][1]} \n
+                    \t 3 : {shortened_results['documents'][2]} | d = {shortened_results['distances'][2]} \n
+
+                    Metadata(source): \n
+                    \t 1 : {shortened_results['metadata'][0]} \n
+                    \t 2 : {shortened_results['metadata'][1]} \n
+                    \t 3 : {shortened_results['metadata'][2]}
                 """
-                
-                # Make the request to OpenAI to get the response
-                try:
-                    reply = OpenAI().chat.completions.create(
-                        model="gpt-3.5-turbo",  # Fixed model name typo from "gpt-3.5-turboo" to "gpt-3.5-turbo"
-                        messages=[
-                            {"role": "developer", "content": "You are a helpful assistant"},
-                            {"role": "user", "content": prompt}
-                        ]
-                    )
-                    
-                    # Display the response content
-                    st.success(reply.choices[0].message.content)
-                    
-                except Exception as e:
-                    st.error(f"Error generating response: {e}")
-    
-    
-                st.markdown("###  RAG = Retrive + Augment + Generate ")
-                
-                # Display the retrieved results and prompt for transparency
-                with st.expander("1. Retrieve", expanded=False):
-    
-                    st.write("_First, Cosine Similarity is applied to the embeddings of user prompt and the external database to **RETRIEVE** the top 3 relevant results._")
 
-                    st.code(" 'distances' : Cosine similarity score [0 to 1], where 1 means a perfect match. Higher values indicate more relevance")
-                    st.code(" 'documents' : Relevant text content from the external database")
-                    st.code(" 'metadata' : Extra details about the documents, such as their source")
+        st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
 
-                    st.write('Retrived results : ')
-                                            
-                    results1 = {
-                                "distances" : results["distances"],
-                                "documents" : results["documents"],
-                                "metadata"  : results["metadata"],
-                            }
-                    
-                    st.write(results1)
-                
-                    
-    
-                # Display the shortened version in Streamlit
-                with st.expander("2. Augment", expanded=False):
+        st.code('Augmented Prompt (redacted version): ')
+        st.info(prompt1)
 
-                    short_distances = [round(results["distances"][i], 2) for i in range(3)]
-                    short_documents = [
-                        results["documents"][i][:35] + "..." if len(results["documents"][i]) > 35 else results["documents"][i]
-                        for i in range(3)
-                    ]
-                    short_metadata = [
-                        f"{results['metadata'][i]['speaker'][:10]} | " +
-                        f"{results['metadata'][i]['video_name'][:10]}... | " +
-                        f"{results['metadata'][i]['video_channel'][:10]}... | " +
-                        f"{results['metadata'][i]['date']} | " +
-                        f"{results['metadata'][i]['video_timestamp']} | " +
-                        f"{results['metadata'][i]['video_url'][:25]}..."
-                        for i in range(3)
-                    ]
-                    
-                    # Combine the processed results into the desired output format
-                    shortened_results = {
-                        "distances": short_distances,
-                        "documents": short_documents,
-                        "metadata": short_metadata
-                    }
-                    
-                    prompt1 = f"""
-                                Hey LLM, below is the user query and the relevant results. Paraphrase a response.
-                    
-                                Query: " {query_text} "
-                                
-                                Top 3 results: \n
-                                \t 1 : {shortened_results['documents'][0]} | d = {shortened_results['distances'][0]} \n
-                                \t 2 : {shortened_results['documents'][1]} | d = {shortened_results['distances'][1]} \n
-                                \t 3 : {shortened_results['documents'][2]} | d = {shortened_results['distances'][2]} \n
-                            
-                                Metadata(source): \n
-                                \t 1 : {shortened_results['metadata'][0]} \n
-                                \t 2 : {shortened_results['metadata'][1]} \n
-                                \t 3 : {shortened_results['metadata'][2]}
-
-                                
-                            """
-                    
-                                        
-                    
-                    st.write("_Instead of feeding just the prompt to the LLM, we **AUGMENT** the prompt by adding retrieved results for better response generation._")
-                    
-                    st.code('Augmented Prompt (redacted version): ')
-                    st.info(prompt1)
-                
-                
-                with st.expander("3. Generate", expanded=False):
-                    st.write("_Finally, the augmented prompt (user prompt + results) is fed to the LLM to **GENERATE** a response._")
-                    st.code(f"Generated response: '{reply.choices[0].message.content}'")
-                                    
-        else:
-            st.warning("Please enter a query to get results")
+    with st.expander("3. Generate", expanded=False):
+        st.write("_Finally, the augmented prompt (user prompt + results) is fed to the LLM to **GENERATE** a response._")
+        st.code(f"Generated response: '{reply_text}'")
 
 
 elif options == "What's Next?":
